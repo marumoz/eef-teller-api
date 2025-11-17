@@ -1,0 +1,35 @@
+{
+    "data-sources": {
+		"baseURL"			: "http://10.124.20.14:8080",
+		"default"			: "POST /EEF_ESBServlet/Main",
+		"jwtToken"			: "post /EEF_ESBServlet/Auth",
+		"token-lookup"		: "post /EEF_TokenLookup/Main",
+		"dashboard-stats"	: "post /EEF_DashboardStats/Main",
+		"teller-session"	: "post /EEF_TellerPortalSessions/Main",
+		"show-receipt"		: "get /EEF_GetReceipt/Show?referenceNumber=%@referenceNumber&floatAccount=%@floatAccount&phoneNumber=%@phoneNumber",
+		"download-receipt"	: "post /EEF_GetReceipt/Download",
+		"password-policy"	: "get /EEF_GetPasswordPolicy/Main",
+		"money-gram"		: "post /EEF_MoneyGram/Main",
+		"audit-trail"		: "post /EEF_AuditTrail/Main",
+		"mg-uploads"		: "post /EEF_MoneyGram/Uploads",
+		"alt-withdrawal-uploads": "post /EEF_CashWithdrawal_FilesServer/Uploads",
+		"alt-withdrawal-main": "post /EEF_AlternativeCashWithdrawal/Main",
+		"reports"			: "post /EEF_SuperAgentReports/Main",
+		"txn-query"			: "post /EEF_TxnStatusQuery/Main",
+		"verify-totp"		: "post /EEF_OTPAdaptor/Validate",
+		"raise-a-case"	    : "post /EEF_CRMServices/Main",
+		"registration-uploads": "post /EEF_RegistrationUploadsBackend/Portal",
+		"get-occupations"	: "get /EEF_GetOccupations/Main"
+	},
+    "meta-data": {
+		"IBName": "Express Exchange Financial",
+		"payload-format": "JSON",
+		"currency": "XAF",
+		"country-code": "CM",
+		"channel": "POS"
+	},
+	"permissions": {
+		"base64": false,
+		"encrypt": false
+	}
+}

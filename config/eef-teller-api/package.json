@@ -1,0 +1,18 @@
+{
+    "name": "api-deployment-tool",
+    "version": "1.0.0",
+    "description": "API Configs Deployment Tool",
+    "main": "deployment.js",
+    "scripts": {
+        "deploy": "node deployment.js"
+    },
+    "author": "Moses Maru",
+    "license": "MIT",
+    "dependencies": {
+        "chalk": "4.1.2",
+        "clear": "^0.1.0",
+        "figlet": "^1.5.2",
+        "ioredis": "^5.2.3",
+        "moment": "^2.29.4"
+    }
+}

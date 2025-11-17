@@ -1,0 +1,878 @@
+{
+    "get-occupations": {
+        "phoneNumber": "string"
+    },
+    "raise-a-case": {
+        "title": "string",
+        "description": "string",
+        "customerIdNumber": "string"
+    },
+    "validate-alt-cash-withdrawal": {
+        "withdrawalToken"			: "string"
+    },
+    "token-lookup-acw": {
+        "withdrawalToken"			: "string"
+    },
+    "alt-cash-withdrawal": {
+        "amount"			: "string",
+        "customerPhone"		: "string",
+        "customerAccount"		    : "string",
+        "customerName"		    : "string"
+    },
+    "customs-guce": {
+        "totalAmount"			: "string",
+        "phoneNumber"		: "string",
+        "fileCode"		    : "string"
+    },
+    "customs-guce-lookup": {
+        "reference"			: "string",
+        "phoneNumber"		: "string"
+    },
+    "money-gram-report": {
+        "outletCode"			: "string",
+        "operatorCode"		: "string"
+    },
+    "query-txn-status": {
+        "requestType"			: "string",
+        "referenceNumber"		: "string"
+    },
+    "university-of-ngaoundere-payment": {
+        "phoneNumber"       : "string|length:12",
+        "amount"			: "string",
+        "accountNumber"		: "string",
+        "studentId"			: "string",
+        "facultyId"			: "string",
+        "feeTypeId"			: "string",
+        "quitus"			: "string",
+        "installment"		: "string|optional",
+        "firstName"			: "string|optional",
+        "lastName"			: "string",
+        "speciality"		: "string",
+        "numberId"			: "string",
+        "schoolDepartment"	: "string",
+        "agentCode"         : "string",
+        "agentName"         : "string",
+        "outletCode"        : "string",
+        "operatorCode"      : "string"
+    },
+    "ngaoundere-university-lookup": {
+        "phoneNumber": "string|length:12",
+        "username": "string",
+        "studentId": "string",
+        "facultyId": "string",
+        "feeTypeId": "string"
+    },
+    "ngaoundere-faculties-lookup": {
+        "phoneNumber": "string|length:12",
+        "username": "string"
+    },
+    "soa-payment": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string",
+        "referenceNumber": "string",
+        "studentId": "string|optional",
+        "studentName": "string",
+        "year": "string",
+        "telephone": "string",
+        "agentCode": "string",
+        "agentName": "string",
+        "outletCode": "string"
+    },
+    "soa-lookup": {
+        "phoneNumber": "string|length:12",
+        "referenceNumber": "string|min:1"
+    },
+    "txn-report": {
+        "dateFrom": "string",
+        "dateTo": "string",
+        "txnType": "string",
+        "phoneNumber": "string",
+        "accountNumber": "string",
+        "agentName": "string",
+        "agentCode": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "approve-mg-amend": {
+        "referenceNumber" 		: "string",
+        "mgId" 		            : "string",
+        "agentName" 		    : "string",
+        "operatorCode" 		    : "string",
+        "outletCode" 		    : "string"
+    },
+    "fetch-mg-amend": {
+        "outletCode" 		: "string",
+        "operatorCode" 		: "string"
+    },
+    "approve-mg-reversal": {
+        "referenceNumber" 		: "string",
+        "agentName" 		    : "string",
+        "operatorCode" 		    : "string",
+        "outletCode" 		    : "string"
+    },
+    "fetch-mg-reversals": {
+        "outletCode" 		: "string"
+    },
+    "reverse-money-gram-transaction": {
+        "referenceNumber" 		: "string",
+        "dateTimeSent" 	: "string",
+        "sendAmount" 	: "string",
+        "feeAmount" 		: "string",
+        "sendCurrency" 		: "string",
+        "reversalReason" 		: "string",
+        "feeRefund" 		: "boolean",
+        "agentName" 		    : "string",
+        "operatorCode" 		    : "string"
+    },
+    "amend-money-gram-transaction": {
+        "referenceNumber" 		: "string",
+        "receiverFirstName" 	: "string",
+        "receiverMiddleName" 	: "string|optional",
+        "receiverLastName" 		: "string",
+        "agentName" 		    : "string",
+        "operatorCode" 		    : "string"
+    },
+    "amend-money-gram-reference-lookup": {
+        "referenceNumber" 		    : "string|min:1"
+    },
+    "customer-audit-trail": {
+        "username" 		    : "string",
+        "moduleName" 		: "string",
+        "moduleId"    	    : "string",
+        "activePage" 		: "string",
+        "customerAccount"   : "string|optional",
+        "customerId"		: "string|optional",
+        "activity"		    : "string",
+        "ip"				: "string",
+        "device"			: "string"
+    },
+    "cnps": {
+        "phoneNumber": "string",
+        "insuranceNumber": "string",
+        "insuranceType": "string",
+        "accountName": "string",
+        "amount": "string",
+        "valeur": "string|optional",
+        "agentName": "string",
+        "agentCode": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "cnps-presentment": {
+        "username": "string",
+        "phoneNumber": "string",
+        "insuranceNumber": "string",
+        "insuranceType": "string"
+    },
+    "dgi": {
+        "phoneNumber": "string",
+        "accountNumber": "string",
+        "amount": "string",
+        "numerodeclaration": "string",
+        "montant": "string",
+        "nomcontriuable": "string",
+        "datecreation": "string",
+        "codepostecomptable": "string",
+        "niu": "string",
+        "objet": "string",
+        "ribrecette": "string",
+        "agentName": "string",
+        "branchCode": "string",
+        "agentCode": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "dgi-presentment": {
+        "username": "string",
+        "phoneNumber": "string",
+        "numerodeclaration": "string"
+    },
+    "retry-commit-money-gram": {
+        "mgiTransactionSessionID": "string|min:1"
+    },
+    "send-money-gram-customer-lookup": {
+        "username": "string",
+        "senderPhoneNumber": "string|min:1"
+    },
+    "money-gram-country-currencies": {
+        "username": "string",
+        "countryId": "string"
+    },
+    "money-gram-country-lookup": {
+        "username": "string"
+    },
+    "receive-money-gram-commit": {
+        "mgiTransactionSessionID": "string",
+        "username": "string",
+        "phoneNumber": "string",
+        "accountNumber": "string",
+        "agentName": "string",
+        "operatorCode": "string",
+        "outletName": "string",
+        "outletCode": "string",
+        "agentCode": "string",
+        "operatorRegion": "string",
+        "operatorCity": "string",
+        "receiverName": "string",
+        "receiverPhoneNumber": "string",
+        "chargeAmount": "string",
+        "taxAmount": "string",
+        "ftTaxAmount": "string",
+        "exciseDutyAmount": "string",
+        "cbtTaxAmount": "string",
+        "totalAmount": ["string", "number|min:1"]
+    },
+    "receive-money-gram-form-validation": {
+    },
+    "get-receive-money-gram-form": {
+        "username": "string",
+        "amount": ["string", "number|min:1"],
+        "country": "string",
+        "receiveCurrency": "string",
+        "sendCurrency": "string",
+        "mgiTransactionSessionID": "string"
+    },
+    "receive-money-gram-reference-lookup": {
+        "username": "string",
+        "referenceNumber": "string|min:1",
+        "phoneNumber": "string",
+        "operatorCode": "string",
+        "accountNumber": "string",
+        "outletCode": "string",
+        "agentCode": "string"
+    },
+    "send-money-gram-commit": {
+        "mgiTransactionSessionID": "string",
+        "username": "string",
+        "phoneNumber": "string",
+        "accountNumber": "string",
+        "agentName": "string",
+        "operatorCode": "string",
+        "outletName": "string",
+        "outletCode": "string",
+        "agentCode": "string",
+        "operatorRegion": "string",
+        "operatorCity": "string",
+        "senderName": "string",
+        "senderPhoneNumber": "string",
+        "chargeAmount": "string",
+        "taxAmount": "string",
+        "ftTaxAmount": "string",
+        "exciseDutyAmount": "string",
+        "cbtTaxAmount": "string",
+        "totalSendFees": "string",
+        "totalAmount": ["string", "number|min:1"]
+    },
+    "send-money-gram-form-validation": {
+    },
+    "get-send-money-gram-form": {
+        "username": "string",
+        "amount": "string",
+        "country": "string",
+        "receiveCurrency": "string",
+        "sendCurrency": "string",
+        "receiveAgentID": "string",
+        "deliveryOption": "string",
+        "mgiTransactionSessionID": "string"
+    },
+    "send-money-gram-fee-lookup": {
+        "username": "string",
+        "phoneNumber": "string",
+        "accountNumber": "string",
+        "direction": "string",
+        "amount": "string",
+        "country": "string",
+        "promoCode": "string|optional",
+        "sendCurrency": "string"
+    },
+    "password-policy": {
+        "username": "string"
+    },
+    "download-receipt": {
+        "TransactionType": "string",
+        "OperatorName": "string",
+        "OperatorCode": "string",
+        "OutletCode": "string"
+    },
+    "reprint-receipt": {
+        "phoneNumber": "string|length:12",
+        "floatAccount": "string",
+        "referenceNumber": "string"
+    },
+    "pay-school": {
+        "phoneNumber": "string|length:12",
+        "schoolName": "string",
+        "facultyName": "string",
+        "amount": "string",
+        "feeName": "string",
+        "facultyAccount": "string",
+        "facultyRef": "string",
+        "accountNumber": "string",
+        "studentName": "string",
+        "studentId": "string",
+        "narration": "string",
+        "billNumber": "string|optional",
+        "agentName": "string",
+        "agentCode": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "fetch-school-faculties": {
+        "phoneNumber": "string|length:12",
+        "reference": "string"
+    },
+    "fetch-schools": {
+        "phoneNumber": "string|length:12"
+    },
+    "uds-payment": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string",
+        "referenceNumber": "string",
+        "studentId": "string",
+        "studentName": "string",
+        "year": "string",
+        "dateGeneration": "string",
+        "tranche": "string",
+        "idpaie": "string",
+        "telephone": "string",
+        "statut": "string",
+        "agentCode": "string",
+        "agentName": "string",
+        "outletCode": "string"
+    },
+    "uds-lookup": {
+        "phoneNumber": "string|length:12",
+        "referenceNumber": "string|min:1"
+    },
+    "capital-services-lookup": {
+        "phoneNumber": "string|length:12",
+        "operationCode": "string|min:1"
+    },
+    "capital-services-to-wallet": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "operationCode": "string|min:1",
+        "accountNumber": "string",
+        "agentCode": "string",
+        "agentName": "string",
+        "outletCode": "string"
+    },
+    "capital-services-to-bank": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "operationCode": "string|min:1",
+        "accountNumber": "string",
+        "agentCode": "string",
+        "agentName": "string",
+        "outletCode": "string"
+    },
+    "camwater-advance-payment": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string|min:1",
+        "accountName": "string|min:1",
+        "agentCode": "string",
+        "agentName": "string",
+        "cardNumber": "string",
+        "outletCode": "string"
+    },
+    "camwater-advance-presentment": {
+        "phoneNumber": "string|length:12",
+        "meterNumber": "string|min:1"
+    },
+    "camwater-postpaid-presentment": {
+        "phoneNumber": "string|length:12",
+        "meterNumber": "string|min:1"
+    },
+    "camwater-prepaid-presentment": {
+        "phoneNumber": "string|length:12",
+        "meterNumber": "string|min:1"
+    },
+    "eneo-postpaid-bill-payment": {
+        "phoneNumber": "string|length:12",
+        "meterNumber": "string|min:1",
+        "accountType": "string|min:1",
+        "accountName": "string",
+        "agentName": "string",
+        "agentCode": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "eneo-prepaid-bill-payment": {
+        "phoneNumber": "string|length:12",
+        "meterNumber": "string|min:1",
+        "accountName": "string",
+        "receiverPhoneNumber": "string",
+        "agentName": "string",
+        "agentCode": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "eneo-postpaid-presentment": {
+        "phoneNumber": "string|length:12",
+        "meterNumber": "string|min:1",
+        "accountType": "string|min:1"
+    },
+    "eneo-prepaid-presentment": {
+        "phoneNumber": "string|length:12",
+        "meterNumber": "string|min:1"
+    },
+    "get-id-types": {
+        "phoneNumber": "string|length:12"
+    },
+    "get-institutions-category": {
+        "phoneNumber": "string|length:12"
+    },
+    "get-institutions": {
+        "phoneNumber": "string|length:12",
+        "reference": "string"
+    },
+    "get-institution-services": {
+        "phoneNumber": "string|length:12",
+        "reference": "string"
+    },
+    "cash-collections": {
+        "phoneNumber": "string|length:12",
+        "institutionName": "string",
+        "serviceName": "string",
+        "amount": "string",
+        "serviceAccount": "string",
+        "accountNumber": "string",
+        "serviceRef": "string",
+        "agentName": "string",
+        "agentCode": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "set-session": {
+        "username": "string",
+        "sessionId": "string"
+    },
+    "get-session": {
+        "username": "string"
+    },
+    "destroy-session": {
+        "username": "string"
+    },
+    "get-cities": {
+        "phoneNumber": "string|length:12"
+    },
+    "dashboard-stats": {
+        "accountNumber": "string"
+    },
+    "login": {
+        "username": "string",
+        "password": "string",
+        "ipAddress": "string"
+    },
+    "send-otp": {
+        "username": "string",
+        "phoneNumber": "string|length:12",
+        "name": "string"
+    },
+    "verify-otp": {
+        "username": "string",
+        "token": "string",
+        "ipAddress": "string"
+    },
+    "verify-totp": {
+        "username": "string",
+        "token": "string",
+        "ipAddress": "string"
+    },
+    "change-password": {
+        "username": "string",
+        "currentPassword": "string",
+        "newPassword": "string"
+    },
+    "reset-password": {
+        "username": "string",
+        "email": "email"
+    },
+    "customer-lookup": {
+        "phoneNumber": "string|length:12"
+    },
+    "registration": {
+        "phoneNumber": "string|length:12",
+        "secondname": "string",
+        "firstname": "string",
+        "surname": "string",
+        "gender": "string",
+        "dob": "string",
+        "idType": "string",
+        "idNumber": "string",
+        "email": "string",
+        "hasCoreAccount": "string",
+        "ipAddress": "string",
+        "name": "string",
+        "accountNumber": "string|optional",
+        "accountName": "string|optional",
+        "accountType": "string|optional",
+        "accountDescription": "string|optional",
+        "accountStatus": "string|optional",
+        "customerID": "string|optional",
+        "currency": "string|optional",
+        "branchCode": "string|optional",
+        "agentCode": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "agent-transaction-lookup": {
+        "customerRef": "string|min:1",
+        "deviceSerialNumber": "string",
+        "agentCode": "string",
+        "outletCode": "string"
+    },
+    "fetch-id-types": {
+    },
+    "token-withdrawal": {
+        "token": "string|min:1",
+        "amount": "string",
+        "phoneNumber": "string|length:12",
+        "agentName": "string",
+        "receiverName": "string",
+        "receiverPhoneNumber": "string",
+        "agentCode": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "token-transfer-lookup": {
+        "token": "string|min:1"
+    },
+    "c2c-token-lookup": {
+        "token": "string|min:1",
+        "operatorCity": "string"
+    },
+    "camwater-prepaid-payment": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string|min:1",
+        "accountName": "string|min:1",
+        "agentCode": "string",
+        "agentName": "string",
+        "cardNumber": "string",
+        "outletCode": "string"
+    },
+    "camwater": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string|min:1",
+        "accountName": "string|min:1",
+        "agentCode": "string",
+        "agentName": "string",
+        "cardNumber": "string",
+        "outletCode": "string"
+    },
+    "eneo": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string|min:1",
+        "agentCode": "string",
+        "agentName": "string",
+        "cardNumber": "string",
+        "outletCode": "string"
+    },
+    "canal": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string|min:1",
+        "agentCode": "string",
+        "agentName": "string",
+        "cardNumber": "string",
+        "outletCode": "string"
+    },
+    "startimes": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string|min:1",
+        "agentCode": "string",
+        "agentName": "string",
+        "cardNumber": "string",
+        "outletCode": "string"
+    },
+    "account-lookup": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string"
+    },
+    "core-account-lookup": {
+        "phoneNumber": "string|length:12"
+    },
+    "wallet-account-lookup": {
+        "phoneNumber": "string|length:12"
+    },
+    "float-balance": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string|min:1",
+        "agentName": "string",
+        "agentCode": "string",
+        "outletCode": "string"
+    },
+    "customer-balance": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string|min:1",
+        "agentName": "string",
+        "branchCode": "string"
+    },
+    "cash-deposit": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string|min:1",
+        "agentName": "string",
+        "amount": "string",
+        "customerName": "string",
+        "customerPhoneNumber": "string",
+        "senderPhoneNumber": "string",
+        "senderName": "string",
+        "senderIdNumber": "string",
+        "narration": "string",
+        "agentCode": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "cash-deposit-core": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string|min:1",
+        "agentName": "string",
+        "amount": "string",
+        "customerName": "string",
+        "customerPhoneNumber": "string",
+        "senderPhoneNumber": "string",
+        "senderName": "string",
+        "senderIdNumber": "string",
+        "narration": "string",
+        "agentCode": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "c2c-deposit": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string|min:1",
+        "agentName": "string",
+        "amount": "string",
+        "receiverName": "string",
+        "receiverPhoneNumber": "string",
+        "agentCode": "string",
+        "senderPhoneNumber": "string",
+        "narration": "string|optional",
+        "senderName": "string",
+        "city": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "cash-withdrawal": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string|min:1",
+        "agentName": "string",
+        "amount": "string",
+        "customerName": "string",
+        "customerPhoneNumber": "string",
+        "agentCode": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "cash-withdrawal-core": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string|min:1",
+        "agentName": "string",
+        "amount": "string",
+        "customerName": "string",
+        "customerPhoneNumber": "string",
+        "agentCode": "string",
+        "outletCode": "string"
+    },
+    "c2c-withdrawal": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string|min:1",
+        "agentName": "string",
+        "amount": "string",
+        "customerName": "string",
+        "customerPhoneNumber": "string",
+        "idType": "string",
+        "idNumber": "string",
+        "agentCode": "string",
+        "narration": "string|optional",
+        "withdrawalCode": "string",
+        "city": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "buy-airtime": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string|min:1",
+        "agentName": "string",
+        "amount": "string",
+        "agentCode": "string",
+        "creditAccount": "string",
+        "customerName": "string",
+        "customerPhoneNumber": "string",
+        "airtimeProvider": { "type": "enum", "values": ["ORANGETOPUP", "MTNTOPUP", "YOOMEETOPUP"] },
+        "branchCode": "string|optional",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "ministatement": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string|min:1",
+        "agentName": "string",
+        "branchCode": "string",
+        "agentCode": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "fullstatement": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string|min:1",
+        "agentName": "string",
+        "dateFrom": "string",
+        "dateTo": "string",
+        "email": "email",
+        "branchCode": "string",
+        "agentCode": "string",
+        "outletCode": "string",
+        "operatorCode": "string"
+    },
+    "alt-cash-withdrawal-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string"
+    },
+    "customs-guce-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string"
+    },
+    "university-of-ngaoundere-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string"
+    },
+    "soa-payment-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string"
+    },
+    "cnps-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string"
+    },
+    "dgi-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string"
+    },
+    "pay-school-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string",
+        "facultyRef": "string"
+    },
+    "cash-collections-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string",
+        "serviceRef": "string"
+    },
+    "uds-payment-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string|min:1"
+    },
+    "capital-services-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string|min:1"
+    },
+    "eneo-postpaid-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string|min:1"
+    },
+    "eneo-prepaid-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string|min:1"
+    },
+    "token-withdrawal-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string|min:1"
+    },
+    "camwater-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string|min:1"
+    },
+    "eneo-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string|min:1"
+    },
+    "canal-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string"
+    },
+    "startimes-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string|min:1"
+    },
+    "core-account-lookup-charges": {
+        "phoneNumber": "string|length:12"
+    },
+    "wallet-account-lookup-charges": {
+        "phoneNumber": "string|length:12"
+    },
+    "float-balance-charges": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string|min:1"
+    },
+    "customer-balance-charges": {
+        "phoneNumber": "string|length:12"
+    },
+    "cash-deposit-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string"
+    },
+    "cash-deposit-core-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string"
+    },
+    "c2c-deposit-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string"
+    },
+    "c2c-withdrawal-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string"
+    },
+    "cash-withdrawal-core-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string"
+    },
+    "cash-withdrawal-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "accountNumber": "string"
+    },
+    "buy-airtime-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "airtimeProvider": { "type": "enum", "values": ["ORANGETOPUP", "MTNTOPUP", "YOOMEETOPUP"] },
+        "accountNumber": "string"
+    },
+    "ministatement-charges": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string"
+    },
+    "fullstatement-charges": {
+        "phoneNumber": "string|length:12",
+        "accountNumber": "string"
+    }
+}

@@ -1,0 +1,3509 @@
+{
+	"request-settings": {
+		"headers": {
+			"default": {
+				"content-type": "application/json",
+				"Authorization": "fetch"
+			},
+			"json": {
+				"content-type": "application/json"
+			},
+			"secureHeaders": {
+				"content-type": "application/x-www-form-urlencoded",
+				"Authorization": "fetch"
+			},
+			"form-data": {
+				"content-type": "multipart/form-data"
+			}
+		},
+		"template": {
+			"field0"      : "0200",
+			"field5"      : "__username",
+			"field24"	  : "BB",
+			"field32"	  : "get;channel",
+			"field37"	  : "create;transactionId",
+			"field43"	  : "get;IBName",
+			"field46"	  : "en",
+			"field49"	  : "get;currency",
+			"field60"	  : "get;country-code",
+			"field77"     : "__deviceType"
+		},
+		"endpoints": {
+			"jwtToken": {
+				"headers": {
+					"content-type": "application/x-www-form-urlencoded"
+				},
+				"data": {
+					"username": "harry",
+					"password": "824528989f4acd7eba47d4d9bf8d37e0cbf96ace2045060fecb1612a6e2abc07"
+				},
+				"response": {
+					"token": {
+						"field": "token"
+					}
+				}
+			},
+			"get-occupations": {
+				"override-source": "get-occupations",
+				"remove-template": true,
+				"override-headers": "json",
+				"request": {},
+				"response": {
+					"status": {
+						"field": "Resp_Code",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "Narration"
+						}
+					}
+				}
+			},
+			"raise-a-case": {
+				"override-source": "raise-a-case",
+				"remove-template": true,
+				"request": {
+					"requestType": "CREATE_CASE",
+                    "Description": "__description",
+                    "Title": "__title",
+                    "Channel": "POS",
+                    "IDNumber": "__customerIdNumber"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"validate-alt-cash-withdrawal": {
+				"override-source": "alt-withdrawal-main",
+				"remove-template": true,
+				"override-headers": "json",
+				"request": {
+					"reqType": "SUBMIT",
+                    "data": {
+                        "Withdrawal_Token": "__withdrawalToken",
+                        "Agent_Number": "__agentCode",
+                        "Outlet_Code": "__outletCode",
+                        "Operator_Code": "__operatorCode"
+                    }
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"token-lookup-acw": {
+				"override-source": "alt-withdrawal-main",
+				"remove-template": true,
+				"override-headers": "json",
+				"request": {
+					"reqType": "VALIDATE",
+                    "data": {
+                        "Withdrawal_Token": "__withdrawalToken",
+                        "Agent_Number": "__agentCode",
+                        "Outlet_Code": "__outletCode",
+                        "Operator_Code": "__operatorCode"
+                    }
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"alt-cash-withdrawal": {
+				"override-source": "alt-withdrawal-main",
+				"remove-template": true,
+				"override-headers": "json",
+				"request": {
+					"reqType": "STAGE",
+                    "data": {
+                        "Transaction_Ref": "__referenceNumber",
+                        "Account_No": "__customerAccount",
+                        "Customer_No": "__customerPhone",
+                        "Customer_Name": "__customerName",
+                        "Agent_Number": "__agentCode",
+                        "Outlet_Code": "__outletCode",
+                        "Operator_Code": "__operatorCode",
+                        "Amount": "__amount",
+                        "Charge_Amount": "__charge",
+                        "Tax_Amount": "__tax",
+                        "Created_By": "__agentName",
+                        "Cheque_Type": "__chequeType",
+                        "Cheque_Number": "__chequeNumber",
+                        "Channel": "POS"
+                    }
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"customs-guce": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "500000",
+					"field4": "__totalAmount",
+					"field24": "MB",
+					"field65": "__combinedCodes",
+					"field68": "Bill Payment",
+					"field70": "__idType",
+					"field71": "__idNumber",
+					"field100": "CUSTOMS",
+					"field101": "__outletCode",
+					"field102": "__accountNumber",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__phoneNumber",
+					"field125": "__agentName",
+					"field127": "__selectedData"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"customs-guce-lookup": {
+				"request": {
+					"field0": "0100",
+                    "field2": "__phoneNumber",
+                    "field3": "180000",
+                    "field4": "0",
+                    "field24": "MM",
+                    "field60": "CM",
+                    "field65": "__reference",
+                    "field68": "Bill Presentment",
+                    "field98": "CUSTOMS",
+                    "field100": "BILL_PRESENTMENT"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"money-gram-report": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "PaymentsReport",
+					"RefNumber": "__refNumber",
+					"Direction": "__direction",
+					"OutletCode": "__outletCode",
+					"OperatorCode": "__operatorCode",
+					"AgentNumber": "__agentNumber",
+					"DateFrom": "__dateFrom",
+					"DateTo": "__dateTo",
+					"request": {
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"query-txn-status": {
+				"override-source": "txn-query",
+				"remove-template": true,
+				"override-headers": "json",
+				"request": {
+					"requestType": "__requestType",
+    				"field37": "__referenceNumber"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"university-of-ngaoundere-payment": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "250000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field65": "__studentId",
+					"field66": "__facultyId",
+					"field67": "__feeTypeId",
+					"field68": "NDERE Payment",
+					"field98": "NDERE",
+					"field100": "NDERE",
+					"field101": "__outletCode",
+					"field102": "__accountNumber",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__phoneNumber",
+					"field125": "__agentName",
+					"field126": "__studentName",
+					"field127": {
+						"quitus": [
+							{
+								"quitusId": "__quitus",
+								"amount": "__amount",
+								"installment": "__installment"
+							}
+						],
+						"firstName": "__firstName",
+						"lastName": "__lastName",
+						"speciality": "__speciality",
+						"numberId": "__numberId",
+						"school": "__schoolDepartment",
+						"academicYear": "__academicYear",
+						"cycle": "__cycle",
+						"level": "__level"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"ngaoundere-university-lookup": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "180000",
+					"field24" :"MM",
+					"field65" :"__studentId",
+					"field66" :"__facultyId",
+					"field67" :"__feeTypeId",
+					"field68" :"Bill Presentment",
+					"field98" :"NDERE",
+					"field100" :"BILL_PRESENTMENT"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"ngaoundere-faculties-lookup": {
+				"request": {
+					"field0": "0100",
+					"field3": "164000",
+					"field68": "Ndere parameters",
+					"field100": "NDERE_PARAMETERS"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"soa-payment": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "250000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field60": "CM",
+					"field65": "__referenceNumber",
+					"field68": "USOA Payment",
+					"field98": "USOA",
+					"field100": "USOA",
+					"field101": "__outletCode",
+					"field102": "__accountNumber",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__phoneNumber",
+					"field125": "__agentName",
+					"field127": ""
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"soa-lookup": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "180000",
+					"field24": "MM",
+					"field60": "CM",
+					"field65": "__referenceNumber",
+					"field68": "Bill Presentment",
+					"field98": "USOA",
+					"field100": "BILL_PRESENTMENT"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"txn-report": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "380000",
+					"field4": "0",
+					"field24": "MM",
+					"field50": "__dateFrom",
+					"field51": "__dateTo",
+					"field60": "CM",
+					"field68": "Float Ministatement",
+					"field98": "__txnType",
+					"field100": "MINISTATE",
+					"field101": "__outletCode",
+					"field102": "__accountNumber",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__phoneNumber",
+					"field125": "__agentName"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": ["00"],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"approve-mg-amend": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "Amend",
+					"data": {
+						"referenceNumber": "__referenceNumber",
+						"ID": "__mgId"
+					},
+					"request": {
+						"OperatorName": "__username",
+						"TellerPhoneNumber": "__phoneNumber",
+						"OperatorNumber": "__operatorCode",
+						"OutletNumber": "__outletCode",
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": ["00"],
+						"error": {
+							"message": "responseMessage"
+						}
+					},
+					"save": false
+				}
+			},
+			"fetch-mg-amend": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "ListAmendTransactions",
+					"request": {
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					},
+					"OperatorNumber": "__operatorCode",
+					"OutletNumber": "__outletCode"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": ["00"],
+						"error": {
+							"message": "responseMessage"
+						}
+					},
+					"save": false
+				}
+			},
+			"approve-mg-reversal": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "Reverse",
+					"data": {
+						"referenceNumber": "__referenceNumber"
+					},
+					"request": {
+						"OperatorName": "__username",
+						"TellerPhoneNumber": "__phoneNumber",
+						"OperatorNumber": "__operatorCode",
+						"OutletNumber": "__outletCode",
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": ["00"],
+						"error": {
+							"message": "responseMessage"
+						}
+					},
+					"save": false
+				}
+			},
+			"fetch-mg-reversals": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "ListReverseTransactions",
+					"request": {
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					},
+					"OutletNumber": "__outletCode"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": ["00"],
+						"error": {
+							"message": "responseMessage"
+						}
+					},
+					"save": false
+				}
+			},
+			"reverse-money-gram-transaction": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "StageReverse",
+					"data": {
+						"channelType": "LOCATION",
+						"referenceNumber": "__referenceNumber",
+						"dateTimeSent": "__dateTimeSent",
+						"sendAmount": "__sendAmount",
+						"feeAmount": "__feeAmount",
+						"sendCurrency": "__sendCurrency",
+						"sendReversalReason": "__reversalReason",
+						"feeRefund": "__feeRefund",
+        				"hasAttachments": true
+					},
+					"request": {
+						"OperatorName": "__username",
+						"TellerPhoneNumber": "__phoneNumber",
+						"OperatorNumber": "__operatorCode",
+						"OutletNumber": "__outletCode",
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": ["00"],
+						"error": {
+							"message": "responseMessage"
+						}
+					},
+					"save": false
+				}
+			},
+			"amend-money-gram-transaction": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "StageAmend",
+					"data": {
+						"channelType": "LOCATION",
+						"referenceNumber": "__referenceNumber",
+						"oldMiddleName": "__oldReceiverMiddleName",
+						"oldLastName": "__oldReceiverLastName",
+						"oldFirstName": "__oldReceiverFirstName",
+						"oldLastName2": "",
+						"newMiddleName": "__receiverMiddleName",
+						"newLastName": "__receiverLastName",
+						"newFirstName": "__receiverFirstName",
+						"newLastName2": "__newLastName2"
+					},
+					"request": {
+						"OperatorName": "__username",
+						"TellerPhoneNumber": "__phoneNumber",
+						"OperatorNumber": "__operatorCode",
+						"OutletNumber": "__outletCode",
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": ["00"],
+						"error": {
+							"message": "responseMessage"
+						}
+					},
+					"save": false
+				}
+			},
+			"amend-money-gram-reference-lookup": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "DetailLookup",
+					"request": {
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					},
+					"data": {
+						"channelType": "LOCATION",
+						"direction": "__direction",
+						"referenceNumber": "__referenceNumber"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": ["00"],
+						"error": {
+							"message": "responseMessage"
+						}
+					},
+					"save": false
+				}
+			},
+			"customer-audit-trail": {
+				"override-source": "audit-trail",
+				"remove-template": true,
+				"override-headers": "json",
+				"request": {
+					"Username": "__username",
+					"Module": "__moduleName",
+					"ModuleID": "__moduleId",
+					"ActivePage": "__activePage",
+					"Activity": "__activity",
+					"CustomerAccount": "__customerAccount",
+					"CustomerID": "__customerId",
+					"LogDate": "create;timeStamp=YYYY-MM-DD",
+					"LogTime": "create;timeStamp=HH:mm:ss",
+					"DateTime": "create;timeStamp=YYYY-MM-DD HH:mm:ss",
+					"Channel": "TELLER",
+					"IPAddress": "__clientIp",
+					"Workstation": "__device"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": ["777"],
+						"error": {
+							"message": "responseMessage"
+						}
+					},
+					"save": false
+				}
+			},
+			"cnps": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "500000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field65": "__insuranceNumber",
+					"field66": "__insuranceType",
+					"field68": "CNPS Payment",
+					"field98": "CNPS",
+					"field100": "CNPS",
+					"field101": "__outletCode",
+					"field102": "__accountNumber",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__remitterPhone",
+					"field125": "__remitterName",
+					"field127": {
+						"libelle_client": "__accountName",
+						"valeur": "__valeur",
+						"id_client": "__insuranceNumber",
+						"solde_client": "__soldeClient",
+						"narration": "__narration"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"cnps-presentment": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "180000",
+					"field24": "MM",
+					"field65": "__insuranceNumber",
+					"field66": "__insuranceType",
+					"field68": "Bill Presentment",
+					"field98": "CNPS",
+					"field100": "BILL_PRESENTMENT"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"dgi": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "500000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field65": "__numerodeclaration",
+					"field68": "Bill Payment",
+					"field100": "DGI",
+					"field101": "__outletCode",
+					"field102": "__accountNumber",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__phoneNumber",
+					"field125": "__senderName",
+					"field126": "__agentName",
+					"field127": {
+						"nom_contribuable": "__nomcontriuable",
+						"numero_declaration": "__numerodeclaration",
+						"rib_recette": "__ribrecette",
+						"reste_a_payer": "__resteapayer",
+						"niu": "__niu",
+						"codepostecomptable": "__codepostecomptable",
+						"type": "__dgitype",
+						"objet": "__objet",
+						"centre_impot": "__centreimpot",
+						"date_creation": "__datecreation",
+						"montant_nominal": "__montant"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"dgi-presentment": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "180000",
+					"field24": "MM",
+					"field65": "__numerodeclaration",
+					"field68": "Bill Presentment",
+					"field98": "DGI",
+					"field100": "BILL_PRESENTMENT"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"send-money-gram-customer-lookup": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "CustomerLookup",
+					"request": {
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					},
+					"data": {
+						"customerPhone": "__senderPhoneNumber",
+						"channelType": "LOCATION"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"money-gram-country-currencies": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "CountryCurrencyLookup",
+					"request": {
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					},
+					"data": {
+						"countryCode": "__countryId"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"money-gram-country-lookup": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "CountryLookup",
+					"request": {
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"receive-money-gram-commit": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "Commit",
+					"data": {
+						"mgiTransactionSessionID": "__mgiTransactionSessionID",
+						"channelType": "LOCATION",
+						"productType": "RCV"
+					},
+					"request": {
+						"PhoneNumber": "__phoneNumber",
+						"ReceiverPhoneNumber": "__receiverPhoneNumber",
+						"ReceiverFirstName": "__receiverName",
+						"FloatAccount": "__floatAccount",
+						"TransactionReference": "create;transactionId",
+						"OperatorName": "__agentName",
+						"OperatorCode": "__operatorCode",
+						"Location": "__operatorCity",
+						"DeviceID": "__clientIp",
+						"OutletName": "__outletName",
+						"OutletCode": "__outletCode",
+						"AgentNumber": "__agentCode",
+						"Region": "__operatorRegion",
+						"FTTaxAmount": "__ftTaxAmount",
+						"Amount": "__totalAmount",
+						"ChargeAmount": "__chargeAmount",
+						"ExciseDutyAmount": "__exciseDutyAmount",
+						"TaxAmount": "__taxAmount",
+						"CBTTaxAmount": "__cbtTaxAmount",
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"receive-money-gram-form-validation": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"include-all-fields": true,
+				"request": {
+					"reqType": "ReceiveValidation",
+					"data": {},
+					"request": {
+						"OperatorName": "__username",
+						"TellerPhoneNumber": "__phoneNumber",
+						"OperatorNumber": "__operatorCode",
+						"OutletNumber": "__outletCode",
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"get-receive-money-gram-form": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "GFFP",
+					"data": {
+						"productType": "RCV",
+						"channelType": "LOCATION",
+						"amount": "__amount",
+						"receiveCountry": "CMR",
+						"receiveCurrency": "__receiveCurrency",
+						"sendCurrency": "__sendCurrency",
+						"deliveryOption": "__deliveryOption",
+						"mgiTransactionSessionID": "__mgiTransactionSessionID"
+					},
+					"request": {
+						"PhoneNumber": "__phoneNumber",
+						"FloatAccount": "__accountNumber",
+						"OperatorCode": "__operatorCode",
+						"OutletCode": "__outletCode",
+						"AgentNumber": "__agentCode",
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"receive-money-gram-reference-lookup": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "CheckRefNo",
+					"data": {
+						"channelType": "LOCATION",
+						"referenceNumber": "__referenceNumber"
+					},
+					"request": {
+						"PhoneNumber": "__phoneNumber",
+						"FloatAccount": "__accountNumber",
+						"OperatorCode": "__operatorCode",
+						"OutletCode": "__outletCode",
+						"AgentNumber": "__agentCode",
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"send-money-gram-commit": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "Commit",
+					"data": {
+						"mgiTransactionSessionID": "__mgiTransactionSessionID",
+						"totalSendFees": "__totalSendFees",
+						"totalSendTaxes": "__totalSendTaxes",
+						"channelType": "LOCATION",
+						"productType": "SEND"
+					},
+					"request": {
+						"PhoneNumber": "__phoneNumber",
+						"SenderPhoneNumber": "__senderPhoneNumber",
+						"SenderFirstName": "__senderName",
+						"FloatAccount": "__floatAccount",
+						"TransactionReference": "create;transactionId",
+						"OperatorName": "__agentName",
+						"OperatorCode": "__operatorCode",
+						"Location": "__operatorCity",
+						"DeviceID": "__clientIp",
+						"OutletName": "__outletName",
+						"OutletCode": "__outletCode",
+						"AgentNumber": "__agentCode",
+						"Region": "__operatorRegion",
+						"FTTaxAmount": "__ftTaxAmount",
+						"Amount": "__sendAmount",
+						"ChargeAmount": "__chargeAmount",
+						"ExciseDutyAmount": "__exciseDutyAmount",
+						"TaxAmount": "__taxAmount",
+						"CBTTaxAmount": "__cbtTaxAmount",
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"send-money-gram-form-validation": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"include-all-fields": true,
+				"request": {
+					"reqType": "SendValidation",
+					"data": {},
+					"request": {
+						"OperatorName": "__username",
+						"TellerPhoneNumber": "__phoneNumber",
+						"OperatorNumber": "__operatorCode",
+						"OutletNumber": "__outletCode",
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"get-send-money-gram-form": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "GFFP",
+					"data": {
+						"productType": "SEND",
+						"channelType": "LOCATION",
+						"amount": "__amount",
+						"receiveCountry": "__country",
+						"receiveCurrency": "__receiveCurrency",
+						"sendCurrency": "__sendCurrency",
+						"receiveAgentID": "__receiveAgentID",
+						"deliveryOption": "__deliveryOption",
+						"mgiTransactionSessionID": "__mgiTransactionSessionID"
+					},
+					"request": {
+						"PhoneNumber": "__phoneNumber",
+						"FloatAccount": "__accountNumber",
+						"OperatorCode": "__operatorCode",
+						"OutletCode": "__outletCode",
+						"AgentNumber": "__agentCode",
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"send-money-gram-fee-lookup": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "FeeLookup",
+					"data": {
+						"channelType": "LOCATION",
+						"productType": "SEND",
+						"direction": "__direction",
+						"amount": "__amount",
+						"receiveCountry": "__country",
+						"sendCurrency": "__sendCurrency",
+						"promoCode": "__promoCode",
+						"includeFee": "__includeFees"
+					},
+					"request": {
+						"PhoneNumber": "__phoneNumber",
+						"FloatAccount": "__accountNumber",
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"retry-commit-money-gram": {
+				"override-source": "money-gram",
+				"remove-template": true,
+				"request": {
+					"reqType": "RetryCommit",
+					"request": {
+						"MGAgentID": "__MGAgentID",
+						"POSNumber": "__POSNumber",
+						"POSPassword": "__POSPassword"
+					},
+					"data": {
+						"channelType": "LOCATION",
+						"mgiTransactionSessionID": "__mgiTransactionSessionID"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"password-policy": {
+				"override-source": "password-policy",
+				"remove-template": true,
+				"request": {},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"download-receipt": {
+				"override-source": "download-receipt",
+				"remove-template": true,
+				"include-all-fields": true,
+				"request": {},
+				"response": {
+					"status": {
+						"field": "code",
+						"matches": [
+							"200"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"reprint-receipt": {
+				"override-source": "show-receipt",
+				"remove-template": true,
+				"path-params": {
+					"phoneNumber": "__phoneNumber",
+					"floatAccount": "__floatAccount",
+					"referenceNumber": "__referenceNumber"
+				},
+				"request": {},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"pay-school": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "250000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field47": "__partnerSchool",
+					"field60": "CM",
+					"field61": "__schoolName",
+					"field62": "__facultyName",
+					"field63": "__studentName",
+					"field64": "__studentId",
+					"field65": "__billNumber",
+					"field68": "__narration",
+					"field69": "__feeName",
+					"field72": "__schoolOption",
+					"field73": "__academicYear",
+					"field76": "__feeId",
+					"field77": "__cycle",
+					"field78": "__installment",
+					"field100": "__schoolRefType",
+					"field101": "__outletCode",
+					"field102": "__accountNumber",
+					"field103": "__facultyAccount",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field106": "__schoolCBSAcc",
+					"field120": "__studentPhoneNumber",
+					"field125": "__agentName",
+					"branch102": "02001",
+					"branch103": "02001"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"fetch-schools": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "188000",
+					"field24": "BB",
+					"field60": "CM",
+					"field68": "Get Schools",
+					"field100": "SCHOOLS"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"fetch-school-faculties": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "188000",
+					"field24": "BB",
+					"field60": "CM",
+					"field65": "__reference",
+					"field68": "Get faculties",
+					"field100": "SCHOOLS_FACULTIES"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"uds-lookup": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "180000",
+					"field24": "MM",
+					"field60": "CM",
+					"field65": "__referenceNumber",
+					"field68": "Bill Presentment",
+					"field98": "UDS",
+					"field100": "BILL_PRESENTMENT"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"uds-payment": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "250000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field60": "CM",
+					"field65": "__referenceNumber",
+					"field68": "UDS Payment",
+					"field98": "UDS",
+					"field100": "UDS",
+					"field101": "__outletCode",
+					"field102": "__accountNumber",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__phoneNumber",
+					"field125": "__agentName",
+					"field127": {
+						"tranche": "__tranche",
+						"idpaie": "__idpaie",
+						"montant": "__amount",
+						"telephone": "__telephone",
+						"idetudiant": "__studentId",
+						"nometudiant": "__studentName",
+						"annee": "__year",
+						"dategeneration": "__dateGeneration",
+						"numquitus": "__referenceNumber",
+						"statut": "__statut",
+						"faculty": "__faculty"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"capital-services-to-wallet": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "450000",
+					"field4": "__amount",
+					"field24": "BM",
+					"field65": "__operationCode",
+					"field68": "Capital Services",
+					"field69": "__beneficiaryCityName",
+					"field70": "__idType",
+					"field71": "__idNumber",
+					"field100": "CAPITAL_SERVICES",
+					"field101": "__outletCode",
+					"field103": "__accountNumber",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__beneficiaryTelephone",
+					"field125": "__agentName",
+					"field127": "__presentmentData"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"capital-services-to-bank": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "450000",
+					"field4": "__amount",
+					"field24": "BM",
+					"field65": "__operationCode",
+					"field68": "Capital Services",
+					"field69": "__beneficiaryCityName",
+					"field70": "__idType",
+					"field71": "__idNumber",
+					"field100": "CAPITAL_SERVICES",
+					"field101": "__outletCode",
+					"field103": "__accountNumber",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__beneficiaryTelephone",
+					"field125": "__agentName",
+					"field127": "__presentmentData"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"capital-services-lookup": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "180000",
+					"field24": "MM",
+					"field60": "CM",
+					"field65": "__operationCode",
+					"field68": "Bill Presentment",
+					"field98": "CAPITAL_SERVICES",
+					"field100": "BILL_PRESENTMENT"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"camwater-advance-presentment": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "180000",
+					"field24": "MM",
+					"field60": "CM",
+					"field65": "__meterNumber",
+					"field68": "Bill Presentment",
+					"field98": "CAMWATER_ADVANCE",
+					"field100": "BILL_PRESENTMENT"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"camwater-postpaid-presentment": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "180000",
+					"field24": "MM",
+					"field60": "CM",
+					"field65": "__meterNumber",
+					"field68": "Bill Presentment",
+					"field98": "CAMWATER",
+					"field100": "BILL_PRESENTMENT"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"camwater-prepaid-presentment": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "180000",
+					"field24": "MM",
+					"field60": "CM",
+					"field65": "__meterNumber",
+					"field68": "Bill Presentment",
+					"field98": "CAMWATER_PREPAID",
+					"field100": "BILL_PRESENTMENT"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"eneo-postpaid-presentment": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "180000",
+					"field24": "MM",
+					"field60": "CM",
+					"field65": "__meterNumber",
+					"field66": "__accountType",
+					"field68": "Bill Presentment",
+					"field98": "ENEO_POSTPAID",
+					"field100": "BILL_PRESENTMENT"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"eneo-prepaid-presentment": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "180000",
+					"field24": "MM",
+					"field60": "CM",
+					"field65": "__meterNumber",
+					"field68": "Bill Presentment",
+					"field98": "ENEO_PREPAID",
+					"field100": "BILL_PRESENTMENT"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"get-id-types": {
+				"request": {
+					"field0": "0100",
+					"field3": "183000",
+					"field100": "ID_TYPES_LOOKUP"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"cash-collections": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "250000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field61": "__institutionName",
+					"field62": "__serviceName",
+					"field63": "__customerName",
+					"field65": "__billNumber",
+					"field66": "__narration",
+					"field68": "Institution Payment",
+					"field69": "__serviceTypeName",
+					"field70": "__idNumber",
+					"field76": "__serviceRef",
+					"field100": "COLLECTIONS",
+					"field101": "__outletCode",
+					"field102": "__accountNumber",
+					"field103": "__serviceAccount",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__senderPhoneNumber",
+					"field125": "__agentName",
+					"branch102": "02001",
+					"branch103": "02001"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"get-institutions-category": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "181000",
+					"field24": "BB",
+					"field100": "INSTITUTIONS"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"get-institutions": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "181000",
+					"field24": "BB",
+					"field65": "__reference",
+					"field100": "INSTITUTION_SERVICES"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"get-institution-services": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "181000",
+					"field24": "BB",
+					"field65": "__reference",
+					"field100": "INSTITUTION_SERVICES"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"set-session": {
+				"override-source": "teller-session",
+				"remove-template": true,
+				"override-headers": "json",
+				"request": {
+					"requestType": "SET",
+					"Username": "__username",
+					"SessionID": "__sessionId"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"get-session": {
+				"override-source": "teller-session",
+				"remove-template": true,
+				"override-headers": "json",
+				"request": {
+					"requestType": "GET",
+					"Username": "__username"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"99"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"destroy-session": {
+				"override-source": "teller-session",
+				"remove-template": true,
+				"override-headers": "json",
+				"request": {
+					"requestType": "DESTROY",
+					"Username": "__username"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"account-lookup": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "360000",
+					"field4": "0",
+					"field24": "MM",
+					"field68": "POS account lookup for account %@field102 - Ref %@field37",
+					"field100": "ACCOUNT_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"get-cities": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "187000",
+					"field24": "MM",
+					"field100": "CITIES_LOOKUP"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"dashboard-stats": {
+				"override-source": "dashboard-stats",
+				"remove-template": true,
+				"override-headers": "json",
+				"request": {
+					"FloatAccount": "__accountNumber",
+					"TellerCode": "__operatorCode",
+					"field37": "create;transactionId"
+				},
+				"response": {
+					"status": {
+						"field": "code",
+						"matches": [
+							"200"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"login": {
+				"request": {
+					"field0": "0100",
+					"field2": "__username",
+					"field3": "112000",
+					"field24": "MM",
+					"field72": "__password",
+					"pin2": "__oldPassword",
+					"field73": "SMS",
+					"field75": "__ipAddress",
+					"field100": "TELLER_LOGIN"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					},
+					"adapter": "profile"
+				}
+			},
+			"send-otp": {
+				"request": {
+					"field0": "0100",
+					"field2": "__username",
+					"field3": "143000",
+					"field24": "MM",
+					"field46": "en",
+					"field66": "__email",
+					"field73": "__otpDestination",
+					"field100": "TELLER_RESEND_OTP",
+					"field120": "__phoneNumber",
+					"field125": "__name"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"verify-otp": {
+				"request": {
+					"field0": "0100",
+					"field2": "__username",
+					"field3": "113000",
+					"field24": "MM",
+					"field72": "__token",
+					"field75": "__ipAddress",
+					"field100": "TELLER_OTP_VALIDATION"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"verify-totp": {
+				"override-source": "verify-totp",
+				"override-headers": "json",
+				"remove-template": true,
+				"request": {
+					"direction": "__otpDestination",
+					"username": "__username",
+					"token": "__token",
+                    "userType": "TELLER"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"change-password": {
+				"request": {
+					"field0": "0100",
+					"field2": "__username",
+					"field3": "142000",
+					"field24": "MM",
+					"field72": "__newCurrentPassword",
+					"field73": "__newPassword",
+					"pin2": "__currentPassword",
+					"field100": "TELLER_CHANGE_PIN"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"customer-lookup": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "360000",
+					"field4": "0",
+					"field24": "MM",
+					"field43": "Express Exchange Financial",
+					"field68": "Customer Lookup for account %@field102",
+					"field100": "CUSTOMER_LOOKUP",
+					"field101": "__outletCode",
+					"field102": "__phoneNumber",
+					"field104": "__agentCode"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"registration": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "120000",
+					"field4": "0",
+					"field24": "MM",
+					"field46": "en",
+					"field61": "__surname",
+					"field62": "__firstname",
+					"field63": "__secondname",
+					"field67": "__gender",
+					"field66": "__dob",
+					"field68": "Registration for account %@field120 ref %@field37",
+					"field69": "__idType",
+					"field70": "__idNumber",
+					"field71": "__email",
+					"field74": "__hasCoreAccount",
+					"field75": "__ipAddress",
+					"field76": "",
+					"field100": "REGISTRATION",
+					"field101": "__outletCode",
+					"field102": "__accountNumber",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__phoneNumber",
+					"field122": "__username",
+					"field125": "__firstname",
+					"field126": "__name",
+					"field127": {
+						"AccountNumber": "__accountNumber",
+						"AccountName": "__accountName",
+						"AccountType": "__accountType",
+						"AccountDescription": "__accountDescription",
+						"AccountStatus": "__accountStatus",
+						"CustomerID": "__customerID",
+						"Currency": "__currency",
+						"Occupation": "__occupation",
+						"NIU": "__niuPin",
+						"BranchCode": "__branchCode"
+					}
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"agent-transaction-lookup": {
+				"request": {
+					"field0": "0100",
+					"field3": "184000",
+					"field4": "0",
+					"field24": "MM",
+					"field38": "__customerRef",
+					"field68": "Cash Withdrawal Tansaction Lookup",
+					"field75": "__clientIp",
+					"field98": "CASH_WITHDRAWAL",
+					"field100": "AGENT_TXN_LOOKUP",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"fetch-id-types": {
+				"request": {
+					"field0": "0100",
+					"field3": "183000",
+					"field4": "0",
+					"field24": "MM",
+					"field68": "Request ID Types",
+					"field100": "ID_TYPES_LOOKUP"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"token-transfer-lookup": {
+				"override-source": "token-lookup",
+				"remove-template": true,
+				"override-headers": "json",
+				"request": {
+					"requestType": "TOKEN_TRANSFER",
+					"Token": "__token",
+					"field37": "create;transactionId"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"c2c-token-lookup": {
+				"override-source": "token-lookup",
+				"remove-template": true,
+				"override-headers": "json",
+				"request": {
+					"requestType": "C2C",
+					"Token": "__token",
+					"City": "__operatorCity",
+					"field37": "create;transactionId"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"token-withdrawal": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "010000",
+					"field4": "__amount",
+					"field24": "MM",
+					"field38": "__originalESBReference",
+					"field65": "__receiverPhoneNumber",
+					"field69": "__idType",
+					"field68": "Funds Transfer",
+					"field70": "__idNumber",
+					"field80": "__token",
+					"field100": "TOKEN_WITHDRAWAL",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__senderPhoneNumber",
+					"field121": "__receiverPhoneNumber",
+					"field125": "__senderName",
+					"field126": "__receiverName"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"camwater-advance-payment": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "500000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field65": "__cardNumber",
+					"field68": "POS %@field100 Bill Payment for account %@field102 - Ref %@field37",
+					"field100": "CAMWATER_ADVANCE",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field102": "__accountNumber",
+					"field120": "__receiverPhoneNumber",
+					"field125": "__accountName"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"camwater-prepaid-payment": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "500000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field65": "__cardNumber",
+					"field68": "POS %@field100 Bill Payment for account %@field102 - Ref %@field37",
+					"field100": "CAMWATER_PREPAID",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field102": "__accountNumber",
+					"field120": "__receiverPhoneNumber",
+					"field125": "__accountName"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"camwater": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "500000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field65": "__cardNumber",
+					"field68": "POS %@field100 Bill Payment for account %@field102 - Ref %@field37",
+					"field100": "CAMWATER",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field102": "__accountNumber",
+					"field120": "__receiverPhoneNumber",
+					"field125": "__accountName"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"eneo-postpaid-bill-payment": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "500000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field65": "__billNumber",
+					"field68": "POS %@field100 Bill Payment for account %@field102 - Ref %@field37",
+					"field100": "ENEO_POSTPAID",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field102": "__accountNumber",
+					"field120": "__receiverPhoneNumber",
+					"field125": "__accountName",
+					"field127": "__prstDetails"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"eneo-prepaid-bill-payment": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "500000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field65": "__meterNumber",
+					"field68": "POS %@field100 Bill Payment for account %@field102 - Ref %@field37",
+					"field100": "ENEO_PREPAID",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field102": "__accountNumber",
+					"field120": "__receiverPhoneNumber",
+					"field125": "__accountName",
+					"field127": "__prstDetails"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"canal": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "500000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field65": "__cardNumber",
+					"field68": "POS %@field100 Bill Payment for account %@field102 - Ref %@field37",
+					"field100": "CANAL",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field102": "__accountNumber",
+					"field120": "__phoneNumber",
+					"field125": "__agentName",
+					"field126": "__accountName"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"startimes": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "500000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field65": "__cardNumber",
+					"field68": "POS %@field100 Bill Payment for account %@field102 - Ref %@field37",
+					"field100": "STARTIMES",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field102": "__accountNumber",
+					"field120": "__phoneNumber",
+					"field125": "__agentName",
+					"field126": "__accountName"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"core-account-lookup": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "360000",
+					"field4": "0",
+					"field24": "BB",
+					"field68": "POS CBS account lookup for account %@field102 - Ref %@field37",
+					"field100": "ACCOUNT_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"wallet-account-lookup": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "360000",
+					"field4": "0",
+					"field24": "MM",
+					"field68": "POS Wallet account lookup for account %@field102 - Ref %@field37",
+					"field100": "ACCOUNT_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"float-balance": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "310000",
+					"field4": "0",
+					"field24": "MM",
+					"field68": "POS Balance Inquiry for account %@field102 - Ref %@field37",
+					"field100": "BI",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field102": "__accountNumber",
+					"field120": "__phoneNumber",
+					"field125": "__agentName"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"customer-balance": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "310000",
+					"field4": "0",
+					"field24": "MM",
+					"field68": "POS Balance Inquiry for account %@field102 - Ref %@field37",
+					"field100": "BI",
+					"field102": "__accountNumber",
+					"field120": "__phoneNumber",
+					"field125": "__agentName",
+					"branch102": "__branchCode"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"cash-deposit": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "210000",
+					"field4": "__amount",
+					"field24": "MM",
+					"field61": "__senderName",
+					"field65": "__senderPhoneNumber",
+					"field66": "__narration",
+					"field68": "POS Funds Transfer to account %@field103 - Ref %@field37",
+					"field71": "__senderIdNumber",
+					"field100": "CASH_DEPOSIT",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field103": "__accountNumber",
+					"field120": "__phoneNumber",
+					"field121": "__customerPhoneNumber",
+					"field125": "__agentName",
+					"field126": "__customerName"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"cash-deposit-core": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "210000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field61": "__senderName",
+					"field65": "__senderPhoneNumber",
+					"field66": "__narration",
+					"field68": "Funds Transfer",
+					"field71": "__senderIdNumber",
+					"field100": "CASH_DEPOSIT_CBS",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field103": "__accountNumber",
+					"field120": "__phoneNumber",
+					"field121": "__customerPhoneNumber",
+					"field125": "__agentName",
+					"field126": "__customerName"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"c2c-deposit": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "210000",
+					"field4": "__amount",
+					"field24": "MM",
+					"field65": "__receiverPhoneNumber",
+					"field66": "__narration",
+					"field68": "POS C2C Transfer to account %@field103 - Ref %@field37",
+					"field69": "__city",
+					"field72": "__operatorCity",
+					"field100": "CASH2CASH_DEPOSIT",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field103": "__accountNumber",
+					"field120": "__senderPhoneNumber",
+					"field121": "__receiverPhoneNumber",
+					"field125": "__senderName",
+					"field126": "__receiverName"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"c2c-withdrawal": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "010000",
+					"field4": "__amount",
+					"field24": "MM",
+					"field38": "__originalESBReference",
+					"field65": "__customerPhoneNumber",
+					"field66": "__narration",
+					"field68": "POS cash to cash withdrawal account %@field103 - Ref %@field37",
+					"field69": "__city",
+					"field70": "__idType",
+					"field71": "__idNumber",
+					"field80": "__withdrawalCode",
+					"field100": "CASH2CASH_WITHDRAWAL",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field103": "__accountNumber",
+					"field120": "__senderPhoneNumber",
+					"field121": "__customerPhoneNumber",
+					"field125": "__senderName",
+					"field126": "__customerName"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"cash-withdrawal-core": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "010000",
+					"field4": "__amount",
+					"field24": "BM",
+					"field68": "Funds Transfer",
+					"field100": "CASH_WITHDRAWAL_CBS",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field102": "__accountNumber",
+					"field120": "__phoneNumber",
+					"field121": "__customerPhoneNumber",
+					"field125": "__agentName",
+					"field126": "__customerName"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"cash-withdrawal": {
+				"request": {
+					"field0": "0100",
+					"field3": "184000",
+					"field4": "__amount",
+					"field24": "MM",
+					"field38": "__customerRef",
+					"field68": "Cash Withdrawal Tansaction Lookup",
+					"field75": "__clientIp",
+					"field98": "CASH_WITHDRAWAL",
+					"field100": "AGENT_TXN_VALIDATE",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__senderPhoneNumber",
+					"field125": "__senderName"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"buy-airtime": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "420000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field65": "__creditAccount",
+					"field68": "POS %@field100 account %@field102 - Ref %@field37",
+					"field100": "__airtimeProvider",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field102": "__accountNumber",
+					"field120": "__phoneNumber",
+					"field121": "__customerPhoneNumber",
+					"field125": "__agentName",
+					"field126": "__customerName",
+					"branch102": "__branchCode"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"ministatement": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "380000",
+					"field4": "0",
+					"field24": "MM",
+					"field68": "POS Mini Statement account %@field102 - Ref %@field37",
+					"field100": "MINISTATE",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field102": "__accountNumber",
+					"field105": "__operatorCode",
+					"field120": "__phoneNumber",
+					"field125": "__agentName",
+					"branch102": "__branchCode"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"fullstatement": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "370000",
+					"field4": "0",
+					"field24": "MM",
+					"field50": "__dateFrom",
+					"field51": "__dateTo",
+					"field66": "__email",
+					"field68": "POS Full Statement account %@field102 - Ref %@field37",
+					"field100": "TELLER_FULLSTATEMENT",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field102": "__accountNumber",
+					"field120": "__phoneNumber",
+					"field125": "__agentName",
+					"branch102": "__branchCode"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"alt-cash-withdrawal-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "MM",
+					"field73": "010000",
+					"field74": "ALT_CASH_WITHDRAWAL_WALL",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"university-of-ngaoundere-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "250000",
+					"field74": "NDERE",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"soa-payment-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "250000",
+					"field74": "USOA",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"cnps-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "500000",
+					"field74": "CNPS",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"dgi-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "500000",
+					"field74": "DGI",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"customs-guce-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "500000",
+					"field74": "CUSTOMS",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"pay-school-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "250000",
+					"field74": "__schoolRefType",
+					"field76": "__facultyRef",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"uds-payment-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "250000",
+					"field74": "UDS",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"capital-services-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "450000",
+					"field74": "CAPITAL_SERVICES",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"cash-collections-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "010000",
+					"field74": "COLLECTIONS",
+					"field76": "__serviceRef",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"token-withdrawal-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "010000",
+					"field74": "TOKEN_WITHDRAWAL",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"camwater-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "500000",
+					"field74": "CAMWATER",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"eneo-postpaid-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "500000",
+					"field74": "ENEO_POSTPAID",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"eneo-prepaid-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "500000",
+					"field74": "ENEO_PREPAID",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"canal-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "500000",
+					"field74": "CANAL",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"startimes-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "500000",
+					"field74": "STARTIMES",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"core-account-lookup-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "0",
+					"field24": "BB",
+					"field73": "360000",
+					"field74": "ACCOUNT_LOOKUP",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"wallet-account-lookup-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "0",
+					"field24": "BB",
+					"field73": "360000",
+					"field74": "ACCOUNT_LOOKUP",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"float-balance-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "0",
+					"field24": "BB",
+					"field73": "310000",
+					"field74": "BI",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"customer-balance-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "0",
+					"field24": "BB",
+					"field73": "310000",
+					"field74": "BI",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"cash-deposit-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "210000",
+					"field74": "CASH_DEPOSIT",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"cash-deposit-core-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "210000",
+					"field74": "CASH_DEPOSIT_CBS",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"c2c-deposit-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "210000",
+					"field74": "CASH2CASH_DEPOSIT",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"c2c-withdrawal-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "010000",
+					"field74": "CASH2CASH_WITHDRAWAL",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"cash-withdrawal-core-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "010000",
+					"field74": "CASH_WITHDRAWAL_CBS",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"cash-withdrawal-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "010000",
+					"field74": "CASH_WITHDRAWAL",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"buy-airtime-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "BB",
+					"field73": "420000",
+					"field74": "__airtimeProvider",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"ministatement-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "0",
+					"field24": "BB",
+					"field73": "380000",
+					"field74": "MINISTATE",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"fullstatement-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "0",
+					"field24": "BB",
+					"field73": "370000",
+					"field74": "FULLSTATEMENT",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__accountNumber"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			}
+		}
+	}
+}

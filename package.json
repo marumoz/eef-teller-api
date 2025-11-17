@@ -1,0 +1,59 @@
+{
+  "name": "eef-agent-api",
+  "version": "2.0.0",
+  "description": "EEF Teller API",
+  "scripts": {
+    "dev": "moleculer-runner --repl --hot services/**/*.service.js",
+    "start": "moleculer-runner",
+    "cli": "moleculer connect NATS",
+    "ci": "jest --watch",
+    "test": "jest --coverage",
+    "lint": "eslint services",
+    "dc:up": "docker-compose up --build -d",
+    "dc:logs": "docker-compose logs -f",
+    "dc:down": "docker-compose down"
+  },
+  "keywords": [
+    "microservices",
+    "moleculer"
+  ],
+  "author": "MOSES MARU",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.25.0",
+    "jest": "^27.5.1",
+    "jest-cli": "^27.5.1",
+    "moleculer-repl": "^0.7.3"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "crypto-js": "^4.2.0",
+    "dot-object": "^2.1.5",
+    "fastest-validator": "^1.19.1",
+    "flat": "^6.0.1",
+    "helmet": "^8.1.0",
+    "ioredis": "^5.8.2",
+    "jsonwebtoken": "^9.0.2",
+    "moleculer": "^0.14.26",
+    "moleculer-web": "^0.10.4",
+    "moment": "^2.30.1",
+    "nats": "^2.7.1",
+    "node-device-detector": "^2.2.4",
+    "querystring": "^0.2.1",
+    "secure-pin": "^1.0.14",
+    "uniqid": "^5.4.0",
+    "winston": "^3.18.3",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "engines": {
+    "node": ">= 16.x.x"
+  },
+  "jest": {
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node",
+    "rootDir": "./services",
+    "roots": [
+      "../test"
+    ]
+  }
+}
