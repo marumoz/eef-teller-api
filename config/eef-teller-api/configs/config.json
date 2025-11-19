@@ -1,6 +1,8 @@
 {
     "data-sources": {
 		"baseURL"			: "http://10.124.20.14:8080",
+		"analytics-trail"   : "post http://localhost:5002/eef-analytics-api/main/teller-audit-trail",
+		"analytics-txns"    : "post http://localhost:5002/eef-analytics-api/main/teller-transactions",
 		"default"			: "POST /EEF_ESBServlet/Main",
 		"jwtToken"			: "post /EEF_ESBServlet/Auth",
 		"token-lookup"		: "post /EEF_TokenLookup/Main",

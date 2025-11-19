@@ -180,7 +180,7 @@
 					"field71": "__idNumber",
 					"field100": "CUSTOMS",
 					"field101": "__outletCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
 					"field120": "__phoneNumber",
@@ -208,9 +208,13 @@
                     "field24": "MM",
                     "field60": "CM",
                     "field65": "__reference",
+                    "field66": "__searchType",
                     "field68": "Bill Presentment",
                     "field98": "CUSTOMS",
-                    "field100": "BILL_PRESENTMENT"
+                    "field100": "BILL_PRESENTMENT",
+                     "field128": {
+                        "MERCHANT_CODE": "__refType"
+                    }
 				},
 				"response": {
 					"status": {
@@ -288,7 +292,7 @@
 					"field98": "NDERE",
 					"field100": "NDERE",
 					"field101": "__outletCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
 					"field120": "__phoneNumber",
@@ -381,7 +385,7 @@
 					"field98": "USOA",
 					"field100": "USOA",
 					"field101": "__outletCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
 					"field120": "__phoneNumber",
@@ -438,7 +442,7 @@
 					"field98": "__txnType",
 					"field100": "MINISTATE",
 					"field101": "__outletCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
 					"field120": "__phoneNumber",
@@ -705,7 +709,7 @@
 					"field98": "CNPS",
 					"field100": "CNPS",
 					"field101": "__outletCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
 					"field120": "__remitterPhone",
@@ -765,7 +769,7 @@
 					"field68": "Bill Payment",
 					"field100": "DGI",
 					"field101": "__outletCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
 					"field120": "__phoneNumber",
@@ -989,7 +993,7 @@
 					},
 					"request": {
 						"PhoneNumber": "__phoneNumber",
-						"FloatAccount": "__accountNumber",
+						"FloatAccount": "__floatAccount",
 						"OperatorCode": "__operatorCode",
 						"OutletCode": "__outletCode",
 						"AgentNumber": "__agentCode",
@@ -1021,7 +1025,7 @@
 					},
 					"request": {
 						"PhoneNumber": "__phoneNumber",
-						"FloatAccount": "__accountNumber",
+						"FloatAccount": "__floatAccount",
 						"OperatorCode": "__operatorCode",
 						"OutletCode": "__outletCode",
 						"AgentNumber": "__agentCode",
@@ -1138,7 +1142,7 @@
 					},
 					"request": {
 						"PhoneNumber": "__phoneNumber",
-						"FloatAccount": "__accountNumber",
+						"FloatAccount": "__floatAccount",
 						"OperatorCode": "__operatorCode",
 						"OutletCode": "__outletCode",
 						"AgentNumber": "__agentCode",
@@ -1176,7 +1180,7 @@
 					},
 					"request": {
 						"PhoneNumber": "__phoneNumber",
-						"FloatAccount": "__accountNumber",
+						"FloatAccount": "__floatAccount",
 						"MGAgentID": "__MGAgentID",
 						"POSNumber": "__POSNumber",
 						"POSPassword": "__POSPassword"
@@ -1298,7 +1302,7 @@
 					"field78": "__installment",
 					"field100": "__schoolRefType",
 					"field101": "__outletCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field103": "__facultyAccount",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
@@ -1402,7 +1406,7 @@
 					"field98": "UDS",
 					"field100": "UDS",
 					"field101": "__outletCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
 					"field120": "__phoneNumber",
@@ -1447,7 +1451,7 @@
 					"field71": "__idNumber",
 					"field100": "CAPITAL_SERVICES",
 					"field101": "__outletCode",
-					"field103": "__accountNumber",
+					"field103": "__floatAccount",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
 					"field120": "__beneficiaryTelephone",
@@ -1480,7 +1484,7 @@
 					"field71": "__idNumber",
 					"field100": "CAPITAL_SERVICES",
 					"field101": "__outletCode",
-					"field103": "__accountNumber",
+					"field103": "__floatAccount",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
 					"field120": "__beneficiaryTelephone",
@@ -1680,7 +1684,7 @@
 					"field76": "__serviceRef",
 					"field100": "COLLECTIONS",
 					"field101": "__outletCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field103": "__serviceAccount",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
@@ -1833,7 +1837,7 @@
 					"field24": "MM",
 					"field68": "POS account lookup for account %@field102 - Ref %@field37",
 					"field100": "ACCOUNT_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -1872,7 +1876,7 @@
 				"remove-template": true,
 				"override-headers": "json",
 				"request": {
-					"FloatAccount": "__accountNumber",
+					"FloatAccount": "__floatAccount",
 					"TellerCode": "__operatorCode",
 					"field37": "create;transactionId"
 				},
@@ -1921,10 +1925,10 @@
 					"field24": "MM",
 					"field46": "en",
 					"field66": "__email",
-					"field73": "__otpDestination",
+					"field73": "__direction",
 					"field100": "TELLER_RESEND_OTP",
 					"field120": "__phoneNumber",
-					"field125": "__name"
+					"field125": "__agentName"
 				},
 				"response": {
 					"status": {
@@ -1965,7 +1969,7 @@
 				"override-headers": "json",
 				"remove-template": true,
 				"request": {
-					"direction": "__otpDestination",
+					"direction": "__direction",
 					"username": "__username",
 					"token": "__token",
                     "userType": "TELLER"
@@ -1988,7 +1992,7 @@
 					"field2": "__username",
 					"field3": "142000",
 					"field24": "MM",
-					"field72": "__newCurrentPassword",
+					"field72": "__currentPassword",
 					"field73": "__newPassword",
 					"pin2": "__currentPassword",
 					"field100": "TELLER_CHANGE_PIN"
@@ -2034,7 +2038,7 @@
 			"registration": {
 				"request": {
 					"field0": "0100",
-					"field2": "__phoneNumber",
+					"field2": "__customerNumber",
 					"field3": "120000",
 					"field4": "0",
 					"field24": "MM",
@@ -2053,15 +2057,15 @@
 					"field76": "",
 					"field100": "REGISTRATION",
 					"field101": "__outletCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
-					"field120": "__phoneNumber",
+					"field120": "__customerNumber",
 					"field122": "__username",
 					"field125": "__firstname",
 					"field126": "__name",
 					"field127": {
-						"AccountNumber": "__accountNumber",
+						"AccountNumber": "__floatAccount",
 						"AccountName": "__accountName",
 						"AccountType": "__accountType",
 						"AccountDescription": "__accountDescription",
@@ -2223,7 +2227,7 @@
 					"field101": "__outletCode",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field120": "__receiverPhoneNumber",
 					"field125": "__accountName"
 				},
@@ -2252,7 +2256,7 @@
 					"field101": "__outletCode",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field120": "__receiverPhoneNumber",
 					"field125": "__accountName"
 				},
@@ -2281,7 +2285,7 @@
 					"field101": "__outletCode",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field120": "__receiverPhoneNumber",
 					"field125": "__accountName"
 				},
@@ -2310,7 +2314,7 @@
 					"field101": "__outletCode",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field120": "__receiverPhoneNumber",
 					"field125": "__accountName",
 					"field127": "__prstDetails"
@@ -2340,7 +2344,7 @@
 					"field101": "__outletCode",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field120": "__receiverPhoneNumber",
 					"field125": "__accountName",
 					"field127": "__prstDetails"
@@ -2370,7 +2374,7 @@
 					"field101": "__outletCode",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field120": "__phoneNumber",
 					"field125": "__agentName",
 					"field126": "__accountName"
@@ -2400,7 +2404,7 @@
 					"field101": "__outletCode",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field120": "__phoneNumber",
 					"field125": "__agentName",
 					"field126": "__accountName"
@@ -2426,7 +2430,7 @@
 					"field24": "BB",
 					"field68": "POS CBS account lookup for account %@field102 - Ref %@field37",
 					"field100": "ACCOUNT_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__customerCbsAccount"
 				},
 				"response": {
 					"status": {
@@ -2449,7 +2453,7 @@
 					"field24": "MM",
 					"field68": "POS Wallet account lookup for account %@field102 - Ref %@field37",
 					"field100": "ACCOUNT_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__customerWallet"
 				},
 				"response": {
 					"status": {
@@ -2474,7 +2478,7 @@
 					"field100": "BI",
 					"field101": "__outletCode",
 					"field104": "__agentCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field120": "__phoneNumber",
 					"field125": "__agentName"
 				},
@@ -2499,7 +2503,7 @@
 					"field24": "MM",
 					"field68": "POS Balance Inquiry for account %@field102 - Ref %@field37",
 					"field100": "BI",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field120": "__phoneNumber",
 					"field125": "__agentName",
 					"branch102": "__branchCode"
@@ -2532,7 +2536,7 @@
 					"field101": "__outletCode",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
-					"field103": "__accountNumber",
+					"field103": "__creditAccount",
 					"field120": "__phoneNumber",
 					"field121": "__customerPhoneNumber",
 					"field125": "__agentName",
@@ -2566,7 +2570,7 @@
 					"field101": "__outletCode",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
-					"field103": "__accountNumber",
+					"field103": "__creditAccount",
 					"field120": "__phoneNumber",
 					"field121": "__customerPhoneNumber",
 					"field125": "__agentName",
@@ -2600,7 +2604,7 @@
 					"field101": "__outletCode",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
-					"field103": "__accountNumber",
+					"field103": "__floatAccount",
 					"field120": "__senderPhoneNumber",
 					"field121": "__receiverPhoneNumber",
 					"field125": "__senderName",
@@ -2637,7 +2641,7 @@
 					"field101": "__outletCode",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
-					"field103": "__accountNumber",
+					"field103": "__floatAccount",
 					"field120": "__senderPhoneNumber",
 					"field121": "__customerPhoneNumber",
 					"field125": "__senderName",
@@ -2666,7 +2670,7 @@
 					"field100": "CASH_WITHDRAWAL_CBS",
 					"field101": "__outletCode",
 					"field104": "__agentCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field120": "__phoneNumber",
 					"field121": "__customerPhoneNumber",
 					"field125": "__agentName",
@@ -2726,7 +2730,7 @@
 					"field101": "__outletCode",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field120": "__phoneNumber",
 					"field121": "__customerPhoneNumber",
 					"field125": "__agentName",
@@ -2756,7 +2760,7 @@
 					"field100": "MINISTATE",
 					"field101": "__outletCode",
 					"field104": "__agentCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field105": "__operatorCode",
 					"field120": "__phoneNumber",
 					"field125": "__agentName",
@@ -2789,7 +2793,7 @@
 					"field101": "__outletCode",
 					"field104": "__agentCode",
 					"field105": "__operatorCode",
-					"field102": "__accountNumber",
+					"field102": "__floatAccount",
 					"field120": "__phoneNumber",
 					"field125": "__agentName",
 					"branch102": "__branchCode"
@@ -2816,7 +2820,7 @@
 					"field73": "010000",
 					"field74": "ALT_CASH_WITHDRAWAL_WALL",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -2840,7 +2844,7 @@
 					"field73": "250000",
 					"field74": "NDERE",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -2864,7 +2868,7 @@
 					"field73": "250000",
 					"field74": "USOA",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -2888,7 +2892,7 @@
 					"field73": "500000",
 					"field74": "CNPS",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -2912,7 +2916,7 @@
 					"field73": "500000",
 					"field74": "DGI",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -2936,7 +2940,7 @@
 					"field73": "500000",
 					"field74": "CUSTOMS",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -2961,7 +2965,7 @@
 					"field74": "__schoolRefType",
 					"field76": "__facultyRef",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -2985,7 +2989,7 @@
 					"field73": "250000",
 					"field74": "UDS",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3009,7 +3013,7 @@
 					"field73": "450000",
 					"field74": "CAPITAL_SERVICES",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3034,7 +3038,7 @@
 					"field74": "COLLECTIONS",
 					"field76": "__serviceRef",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3058,7 +3062,7 @@
 					"field73": "010000",
 					"field74": "TOKEN_WITHDRAWAL",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3082,7 +3086,7 @@
 					"field73": "500000",
 					"field74": "CAMWATER",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3106,7 +3110,7 @@
 					"field73": "500000",
 					"field74": "ENEO_POSTPAID",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3130,7 +3134,7 @@
 					"field73": "500000",
 					"field74": "ENEO_PREPAID",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3154,7 +3158,7 @@
 					"field73": "500000",
 					"field74": "CANAL",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3178,7 +3182,7 @@
 					"field73": "500000",
 					"field74": "STARTIMES",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3202,7 +3206,7 @@
 					"field73": "360000",
 					"field74": "ACCOUNT_LOOKUP",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3226,7 +3230,7 @@
 					"field73": "360000",
 					"field74": "ACCOUNT_LOOKUP",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3250,7 +3254,7 @@
 					"field73": "310000",
 					"field74": "BI",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3274,7 +3278,7 @@
 					"field73": "310000",
 					"field74": "BI",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3298,7 +3302,7 @@
 					"field73": "210000",
 					"field74": "CASH_DEPOSIT",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3322,7 +3326,7 @@
 					"field73": "210000",
 					"field74": "CASH_DEPOSIT_CBS",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3346,7 +3350,7 @@
 					"field73": "210000",
 					"field74": "CASH2CASH_DEPOSIT",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3370,7 +3374,7 @@
 					"field73": "010000",
 					"field74": "CASH2CASH_WITHDRAWAL",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3394,7 +3398,7 @@
 					"field73": "010000",
 					"field74": "CASH_WITHDRAWAL_CBS",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3418,7 +3422,7 @@
 					"field73": "010000",
 					"field74": "CASH_WITHDRAWAL",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3442,7 +3446,7 @@
 					"field73": "420000",
 					"field74": "__airtimeProvider",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3466,7 +3470,7 @@
 					"field73": "380000",
 					"field74": "MINISTATE",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {
@@ -3490,7 +3494,7 @@
 					"field73": "370000",
 					"field74": "FULLSTATEMENT",
 					"field100": "CHARGE_LOOKUP",
-					"field102": "__accountNumber"
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {

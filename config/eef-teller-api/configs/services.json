@@ -39,7 +39,7 @@
     "university-of-ngaoundere-payment": {
         "phoneNumber"       : "string|length:12",
         "amount"			: "string",
-        "accountNumber"		: "string",
+        "floatAccount"		: "string",
         "studentId"			: "string",
         "facultyId"			: "string",
         "feeTypeId"			: "string",
@@ -69,7 +69,7 @@
     "soa-payment": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string",
+        "floatAccount": "string",
         "referenceNumber": "string",
         "studentId": "string|optional",
         "studentName": "string",
@@ -88,7 +88,7 @@
         "dateTo": "string",
         "txnType": "string",
         "phoneNumber": "string",
-        "accountNumber": "string",
+        "floatAccount": "string",
         "agentName": "string",
         "agentCode": "string",
         "outletCode": "string",
@@ -167,7 +167,7 @@
     },
     "dgi": {
         "phoneNumber": "string",
-        "accountNumber": "string",
+        "floatAccount": "string",
         "amount": "string",
         "numerodeclaration": "string",
         "montant": "string",
@@ -206,7 +206,7 @@
         "mgiTransactionSessionID": "string",
         "username": "string",
         "phoneNumber": "string",
-        "accountNumber": "string",
+        "floatAccount": "string",
         "agentName": "string",
         "operatorCode": "string",
         "outletName": "string",
@@ -238,7 +238,7 @@
         "referenceNumber": "string|min:1",
         "phoneNumber": "string",
         "operatorCode": "string",
-        "accountNumber": "string",
+        "floatAccount": "string",
         "outletCode": "string",
         "agentCode": "string"
     },
@@ -246,7 +246,7 @@
         "mgiTransactionSessionID": "string",
         "username": "string",
         "phoneNumber": "string",
-        "accountNumber": "string",
+        "floatAccount": "string",
         "agentName": "string",
         "operatorCode": "string",
         "outletName": "string",
@@ -279,7 +279,7 @@
     "send-money-gram-fee-lookup": {
         "username": "string",
         "phoneNumber": "string",
-        "accountNumber": "string",
+        "floatAccount": "string",
         "direction": "string",
         "amount": "string",
         "country": "string",
@@ -308,7 +308,7 @@
         "feeName": "string",
         "facultyAccount": "string",
         "facultyRef": "string",
-        "accountNumber": "string",
+        "floatAccount": "string",
         "studentName": "string",
         "studentId": "string",
         "narration": "string",
@@ -328,7 +328,7 @@
     "uds-payment": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string",
+        "floatAccount": "string",
         "referenceNumber": "string",
         "studentId": "string",
         "studentName": "string",
@@ -354,7 +354,7 @@
         "phoneNumber": "string|length:12",
         "amount": "string",
         "operationCode": "string|min:1",
-        "accountNumber": "string",
+        "floatAccount": "string",
         "agentCode": "string",
         "agentName": "string",
         "outletCode": "string"
@@ -363,7 +363,7 @@
         "phoneNumber": "string|length:12",
         "amount": "string",
         "operationCode": "string|min:1",
-        "accountNumber": "string",
+        "floatAccount": "string",
         "agentCode": "string",
         "agentName": "string",
         "outletCode": "string"
@@ -371,7 +371,7 @@
     "camwater-advance-payment": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "accountName": "string|min:1",
         "agentCode": "string",
         "agentName": "string",
@@ -439,7 +439,7 @@
         "serviceName": "string",
         "amount": "string",
         "serviceAccount": "string",
-        "accountNumber": "string",
+        "floatAccount": "string",
         "serviceRef": "string",
         "agentName": "string",
         "agentCode": "string",
@@ -460,7 +460,7 @@
         "phoneNumber": "string|length:12"
     },
     "dashboard-stats": {
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "login": {
         "username": "string",
@@ -470,7 +470,7 @@
     "send-otp": {
         "username": "string",
         "phoneNumber": "string|length:12",
-        "name": "string"
+        "agentName": "string"
     },
     "verify-otp": {
         "username": "string",
@@ -495,7 +495,7 @@
         "phoneNumber": "string|length:12"
     },
     "registration": {
-        "phoneNumber": "string|length:12",
+        "customerNumber": "string|length:12",
         "secondname": "string",
         "firstname": "string",
         "surname": "string",
@@ -507,7 +507,7 @@
         "hasCoreAccount": "string",
         "ipAddress": "string",
         "name": "string",
-        "accountNumber": "string|optional",
+        "floatAccount": "string|optional",
         "accountName": "string|optional",
         "accountType": "string|optional",
         "accountDescription": "string|optional",
@@ -548,7 +548,7 @@
     "camwater-prepaid-payment": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "accountName": "string|min:1",
         "agentCode": "string",
         "agentName": "string",
@@ -558,7 +558,7 @@
     "camwater": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "accountName": "string|min:1",
         "agentCode": "string",
         "agentName": "string",
@@ -568,7 +568,7 @@
     "eneo": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "agentCode": "string",
         "agentName": "string",
         "cardNumber": "string",
@@ -577,7 +577,7 @@
     "canal": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "agentCode": "string",
         "agentName": "string",
         "cardNumber": "string",
@@ -586,7 +586,7 @@
     "startimes": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "agentCode": "string",
         "agentName": "string",
         "cardNumber": "string",
@@ -594,7 +594,7 @@
     },
     "account-lookup": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "core-account-lookup": {
         "phoneNumber": "string|length:12"
@@ -604,20 +604,20 @@
     },
     "float-balance": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "agentName": "string",
         "agentCode": "string",
         "outletCode": "string"
     },
     "customer-balance": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "agentName": "string",
         "branchCode": "string"
     },
     "cash-deposit": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "agentName": "string",
         "amount": "string",
         "customerName": "string",
@@ -632,7 +632,7 @@
     },
     "cash-deposit-core": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "agentName": "string",
         "amount": "string",
         "customerName": "string",
@@ -647,7 +647,7 @@
     },
     "c2c-deposit": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "agentName": "string",
         "amount": "string",
         "receiverName": "string",
@@ -662,7 +662,7 @@
     },
     "cash-withdrawal": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "agentName": "string",
         "amount": "string",
         "customerName": "string",
@@ -673,7 +673,7 @@
     },
     "cash-withdrawal-core": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "agentName": "string",
         "amount": "string",
         "customerName": "string",
@@ -683,7 +683,7 @@
     },
     "c2c-withdrawal": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "agentName": "string",
         "amount": "string",
         "customerName": "string",
@@ -699,7 +699,7 @@
     },
     "buy-airtime": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "agentName": "string",
         "amount": "string",
         "agentCode": "string",
@@ -713,7 +713,7 @@
     },
     "ministatement": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "agentName": "string",
         "branchCode": "string",
         "agentCode": "string",
@@ -722,7 +722,7 @@
     },
     "fullstatement": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string|min:1",
+        "floatAccount": "string|min:1",
         "agentName": "string",
         "dateFrom": "string",
         "dateTo": "string",
@@ -735,79 +735,79 @@
     "alt-cash-withdrawal-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "customs-guce-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "university-of-ngaoundere-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "soa-payment-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "cnps-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "dgi-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "pay-school-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string",
+        "floatAccount": "string",
         "facultyRef": "string"
     },
     "cash-collections-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string",
+        "floatAccount": "string",
         "serviceRef": "string"
     },
     "uds-payment-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string|min:1"
+        "floatAccount": "string|min:1"
     },
     "capital-services-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string|min:1"
+        "floatAccount": "string|min:1"
     },
     "eneo-postpaid-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string|min:1"
+        "floatAccount": "string|min:1"
     },
     "eneo-prepaid-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string|min:1"
+        "floatAccount": "string|min:1"
     },
     "token-withdrawal-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string|min:1"
+        "floatAccount": "string|min:1"
     },
     "camwater-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string|min:1"
+        "floatAccount": "string|min:1"
     },
     "eneo-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string|min:1"
+        "floatAccount": "string|min:1"
     },
     "canal-charges": {
         "phoneNumber": "string|length:12",
@@ -816,7 +816,7 @@
     "startimes-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string|min:1"
+        "floatAccount": "string|min:1"
     },
     "core-account-lookup-charges": {
         "phoneNumber": "string|length:12"
@@ -826,7 +826,7 @@
     },
     "float-balance-charges": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string|min:1"
+        "floatAccount": "string|min:1"
     },
     "customer-balance-charges": {
         "phoneNumber": "string|length:12"
@@ -834,45 +834,45 @@
     "cash-deposit-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "cash-deposit-core-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "c2c-deposit-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "c2c-withdrawal-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "cash-withdrawal-core-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "cash-withdrawal-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "buy-airtime-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
         "airtimeProvider": { "type": "enum", "values": ["ORANGETOPUP", "MTNTOPUP", "YOOMEETOPUP"] },
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "ministatement-charges": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string"
+        "floatAccount": "string"
     },
     "fullstatement-charges": {
         "phoneNumber": "string|length:12",
-        "accountNumber": "string"
+        "floatAccount": "string"
     }
 }
