@@ -69,6 +69,7 @@ module.exports = {
 						});
                         
 						const resData = { ...res.data, sessionId: "session-id", token: jwtToken };
+						resData.accountInfo.floatAccount = this.obscureAccountNumber(resData.accountInfo.floatAccount);
 						response = {
 							success     : true,
 							data        : resData,
@@ -109,7 +110,7 @@ module.exports = {
 					userDevice: ctx.meta.userDevice
 				};
 
-				let { username, otp, requestId, verificationType, meta } = payload;
+				let { username, otp, requestId, verificationType } = payload;
 
 				let response = {
 					success     :false,
@@ -120,14 +121,13 @@ module.exports = {
 
 				if(hashedPass){
 					let params = {
-						"transactionType": "verify-otp", 
+						"transactionType": verificationType === "TOTP" ? "verify-totp" : "verify-otp", 
 						"payload": {
-							username     ,
-							direction    : verificationType,
-							token        : hashedPass,
-							ipAddress    : ctx.meta.clientIp
-						},
-						meta
+							username,
+							direction: verificationType,
+							token: hashedPass,
+							ipAddress: ctx.meta.clientIp
+						}
 					};
 					let res = await ctx.call("transactions.mainRequest", { payload: params });
 
@@ -238,7 +238,7 @@ module.exports = {
 					userDevice: ctx.meta.userDevice
 				};
 
-				let { username, phoneNumber, name, email, direction, meta } = payload;
+				let { username, phoneNumber, agentName, email, direction } = payload;
 
 				let response = {
 					success     :false,
@@ -250,11 +250,10 @@ module.exports = {
 					"payload": {
 						username,
 						phoneNumber,
-						name,
+						agentName,
 						direction,
 						email
-					},
-					meta
+					}
 				};
 
 				let res = await ctx.call("transactions.mainRequest", { payload: params });
@@ -295,36 +294,45 @@ module.exports = {
 					userDevice: ctx.meta.userDevice
 				};
 
-				let { username } = payload;
+				let { username, signout } = payload;
 
 				let response = {
-					success     :false,
-					message     :"session authentication failed"
+					success: false,
+					message: "session authentication failed"
 				};
 
-				const isAuthenticated = await this.tokenAuthentication({ 
-					appName: this.settings.appName, 
-					username, 
-					ipAddress: ctx.meta.clientIp, 
-					userToken: ctx.meta.token, 
-					userTokenId: ctx.meta.user.username
-				});
-
-				if(isAuthenticated.success){
-					response = {
-						success: true,
-						message: `session authentication successful. User: ${username}`
+				if(signout){
+					await this.RedisDelete([ this.settings.appName, "appclients", username ].join(":"));
+					return {
+						message: await this.aesEncrypt(response, publicKey)
 					};
 				}else{
-					logData.type = "debug";
-					ctx.emit("create.log", logData);
+					const isAuthenticated = await this.tokenAuthentication({ 
+						appName: this.settings.appName, 
+						username, 
+						ipAddress: ctx.meta.clientIp, 
+						userToken: ctx.meta.token, 
+						userTokenId: ctx.meta.user.username
+					});
 
-					await this.RedisDelete([ this.settings.appName, "appclients", username ].join(":"));
+					if(isAuthenticated.success){
+						response = {
+							success: true,
+							message: `session authentication successful. User: ${username}`
+						};
+					}else{
+						logData.type = "debug";
+						ctx.emit("create.log", logData);
+
+						await this.RedisDelete([ this.settings.appName, "appclients", username ].join(":"));
+					}
+
+					return {
+						message: await this.aesEncrypt(response, publicKey)
+					};
 				}
 
-				return {
-					message: await this.aesEncrypt(response, publicKey)
-				};
+				
 			}
 		},
 		serverVerifySession: {
@@ -362,19 +370,24 @@ module.exports = {
 					const meta = {
 						username,
 						agentName: isAuthenticated.userData.accountDetails.personalInfo.agentName,
+						phoneNumber: isAuthenticated.userData.accountDetails.personalInfo.phoneNumber,
 						agentCode: isAuthenticated.userData.accountDetails.agentInfo.agentNumber,
 						agentNumber: isAuthenticated.userData.accountDetails.agentInfo.agentNumber,
 						outletCode: isAuthenticated.userData.accountDetails.agentInfo.outletCode,
 						operatorCode: isAuthenticated.userData.accountDetails.agentInfo.operatorCode,
 						businessName: isAuthenticated.userData.accountDetails.agentInfo.businessName,
 						branchName: isAuthenticated.userData.accountDetails.agentInfo.branchName,
+						outletName: isAuthenticated.userData.accountDetails.agentInfo.branchName,
 						operatorCity: isAuthenticated.userData.accountDetails.agentInfo.operatorCity,
-						operatorRegion: isAuthenticated.userData.accountDetails.agentInfo.operatorRegion
+						operatorRegion: isAuthenticated.userData.accountDetails.agentInfo.operatorRegion,
+						MGAgentID: isAuthenticated.userData.accountDetails.mgInfo.MGAgentID,
+						POSNumber: isAuthenticated.userData.accountDetails.mgInfo.POSNumber,
+						POSPassword: isAuthenticated.userData.accountDetails.mgInfo.POSPassword
 					};
 					response = {
 						success: true,
 						message: "success",
-						floatAccount: isAuthenticated.userData.floatAccount,
+						floatAccount: isAuthenticated.userData.floatAccount.toString(),
 						meta
 					};
 				}else{
@@ -402,6 +415,12 @@ module.exports = {
 				console.error(error);
 				return false;
 			}
+		},
+		obscureAccountNumber (accountNumber){
+		// Replace the first 3 and the last 3 characters with 'X'
+			let unmaskedStart = accountNumber.slice(0, 3);
+			let unmaskedEnd = accountNumber.slice(0, -3);
+			return unmaskedStart + accountNumber.slice(3, unmaskedEnd.length).replace(/./g, "X") + accountNumber.slice(unmaskedEnd.length, accountNumber.length);
 		}
 	}
 };

@@ -67,6 +67,29 @@ module.exports = {
 			}
     
 			return isAuthenticated;
+		},
+		async fetchCacheSession ({ appName, username }){
+			let key             = [ appName, "appclients", username ].join(":");
+			let keys            = [ key ];
+			let redis_data      = await this.RedisGetMany(keys);
+			let isAuthenticated = { userData: {} };
+    
+			try {
+				let user_data    = redis_data[`${username}`];
+				user_data        = this.retrieveUserData(user_data);
+
+				if(user_data){
+					isAuthenticated = {
+						success: true,
+						userData: user_data
+					};
+				}
+
+			} catch (error) {
+				console.error(error);
+			}
+    
+			return isAuthenticated;
 		}
 	}
 };

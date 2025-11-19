@@ -33,7 +33,6 @@ module.exports = {
 				let { data: payload, publicKey } = this.aesDecrypt(reqData);
 
 				let response = await await ctx.call("transactions.mainRequest",{ payload });
-
 				return {
 					message: await this.aesEncrypt({ ...response, requestId: payload.requestId }, publicKey)
 				};

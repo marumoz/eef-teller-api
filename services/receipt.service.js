@@ -28,10 +28,8 @@ module.exports = {
 				//payload: "string"
 			},
 			async handler (ctx) {
-				let { payload } = ctx.params;
-
-				// Run decryption
-				payload = this.aesDecrypt(payload);
+				let { payload: reqData } = ctx.params;
+				let { data: payload, publicKey } = this.aesDecrypt(reqData);
 				//console.log('>>>>>>>>>>>>>>>>>>> PRINT RECEIPT',JSON.stringify({ payload, url: this.settings.dataSources['download-receipt'] }, null, 4))
 
 				let feedback = {
@@ -56,7 +54,7 @@ module.exports = {
 					ctx.emit("create.log", logData);
 
 					return {
-						message: this.aesEncrypt(feedback)
+						message: await this.aesEncrypt(feedback, publicKey)
 					};
 				}
 				let dwldReceiptUrl = this.settings.dataSources["download-receipt"].split(" ").filter(e => e && e)[1];
@@ -177,7 +175,7 @@ module.exports = {
 						logData.clientResponse = feedback;
 						ctx.emit("create.log", logData);
 
-						resolve(this.aesEncrypt(feedback));
+						resolve(feedback);
 					});
 
 					ctx.params.on ( "error", err => {
@@ -305,7 +303,7 @@ module.exports = {
 						logData.clientResponse = feedback;
 						ctx.emit("create.log", logData);
 
-						resolve(this.aesEncrypt(feedback));
+						resolve(feedback);
 					});
 
 					ctx.params.on ( "error", err => {
@@ -433,7 +431,7 @@ module.exports = {
 						logData.clientResponse = feedback;
 						ctx.emit("create.log", logData);
 
-						resolve(this.aesEncrypt(feedback));
+						resolve(feedback);
 					});
 
 					ctx.params.on ( "error", err => {

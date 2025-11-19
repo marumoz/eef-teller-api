@@ -6,26 +6,26 @@ const path 	 = require("path");
 const env    = require( path.resolve("./env") );
 
 const UtilitiesMixin    = require("../mixins/utilities.mixin");
+const SessionMixin      = require("../mixins/session.mixin");
 require("winston-daily-rotate-file");
 
 module.exports = {
 	name        : "logger",
 
-	mixins: [ UtilitiesMixin ],
+	mixins: [ UtilitiesMixin, SessionMixin ],
+
+	settings: {
+		appName: "eef-teller-api"
+	},
 
 	actions     : {
 		customerAuditTrail: {
-			params: {
-				payload 	: "string"
-			},
-
 			async handler (ctx){
+				const { userDevice, clientIp } = ctx.meta;
+				const { payload: reqData } = ctx.params;
+				const { data: decrypted, publicKey } = this.aesDecrypt(reqData);
 
-				let { userDevice } = ctx.meta;
-				let { payload } = ctx.params;
-				let decrypted = this.aesDecrypt(payload);
-
-				let moduleIds = {
+				const moduleIds = {
 					"transaction charges"			: "3001",
 					"stage transaction"				: "3002",
 					"submit transaction"			: "3003",
@@ -48,31 +48,57 @@ module.exports = {
 					"account activation"			: "3020"
 				};
                 
-				let moduleId = moduleIds[decrypted.module.toLowerCase()] || "3333";
+				const moduleId = moduleIds[decrypted.module.toLowerCase()] || "3333";
+				const isAuthenticated = await this.fetchCacheSession({ 
+					appName: this.settings.appName, 
+					username: decrypted.username
+				});
+				let floatAccount, agentName, phoneNumber, agentNumber, outletCode, operatorCode, businessName, branchName, outletName, operatorCity, operatorRegion;
+				if(isAuthenticated.success){
+					const { accountDetails } = isAuthenticated.userData;
+					floatAccount = isAuthenticated.userData.floatAccount.toString();
+					agentName = accountDetails.personalInfo.agentName;
+					phoneNumber = accountDetails.personalInfo.phoneNumber;
+					agentNumber = accountDetails.agentInfo.agentNumber;
+					outletCode = accountDetails.agentInfo.outletCode;
+					operatorCode = accountDetails.agentInfo.operatorCode;
+					businessName = accountDetails.agentInfo.businessName;
+					branchName = accountDetails.agentInfo.branchName;
+					outletName = accountDetails.agentInfo.branchName;
+					operatorCity = accountDetails.agentInfo.operatorCity;
+					operatorRegion = accountDetails.agentInfo.operatorRegion;
+				}
 
-				let params = {
+				const params = {
 					"transactionType": "customer-audit-trail",
 					payload: {
-						username 		: decrypted.username,
-						moduleName 		: decrypted.module,
-						moduleId    	,
-						activePage 		: decrypted.page,
-						customerAccount	: decrypted.account,
-						activity		: decrypted.activity, 
-						agentName	    : decrypted?.agentName || "",
-						agentCode	    : decrypted?.agentCode || "",
-						outletCode	    : decrypted?.outletCode || "",
-						operatorCode    : decrypted?.operatorCode || "",
-						ip				: ctx.meta.clientIp,
-						device			: `${userDevice.osName} ${userDevice.deviceType} ${userDevice.brand} ${userDevice.clientType} ${userDevice.clientName}`
+						username: decrypted.username,
+						moduleName: decrypted.module,
+						moduleId,
+						activePage: decrypted.page,
+						customerAccount: decrypted.account,
+						activity: decrypted.activity, 
+						agentName: agentName || "",
+						phoneNumber: phoneNumber || "",
+						floatAccount: floatAccount || "",
+						agentCode: agentNumber || "",
+						outletCode: outletCode || "",
+						operatorCode: operatorCode || "",
+						businessName: businessName || "",
+						branchName: branchName || "",
+						outletName: outletName || "",
+						operatorCity: operatorCity || "",
+						operatorRegion: operatorRegion || "",
+						ip: clientIp,
+						device: `${userDevice.osName} ${userDevice.deviceType} ${userDevice.brand} ${userDevice.clientType} ${userDevice.clientName}`
 					}
 				};
 
-				ctx.call("transactions.request", { payload: this.aesEncrypt(params) });
+				ctx.call("transactions.mainRequest", { payload: params });
 				ctx.call("analytics.usage", { payload: params.payload, runAnalytics: env["enable-analytics"] });
 
 				return {
-					message: this.aesEncrypt({ success: true })
+					message: await this.aesEncrypt({ success: true }, publicKey)
 				};
 			}
 		},
