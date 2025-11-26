@@ -212,7 +212,7 @@
                     "field68": "Bill Presentment",
                     "field98": "CUSTOMS",
                     "field100": "BILL_PRESENTMENT",
-                     "field128": {
+                    "field128": {
                         "MERCHANT_CODE": "__refType"
                     }
 				},

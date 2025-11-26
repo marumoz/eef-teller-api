@@ -126,7 +126,7 @@ module.exports = {
 			return exists;         
 		},
 		async Redis_CheckIfExistsInSet (setName, fieldName) {
-			let exists = await this.client.hexists(setName, fieldName);
+			let exists = await this.client.sismember(setName, fieldName);
         
 			return exists;         
 		},

@@ -15,7 +15,8 @@ module.exports = {
 	mixins: [ UtilitiesMixin, SessionMixin ],
 
 	settings: {
-		appName: "eef-teller-api"
+		appName: "eef-teller-api",
+		dataSources: {}
 	},
 
 	actions     : {
@@ -95,7 +96,18 @@ module.exports = {
 				};
 
 				ctx.call("transactions.mainRequest", { payload: params });
-				ctx.call("analytics.usage", { payload: params.payload, runAnalytics: env["enable-analytics"] });
+				// ctx.call("transactions.mainRequest", { payload: params });
+				// ctx.call("analytics.usage", { payload: params.payload, runAnalytics: env["enable-analytics"] });
+
+				let auditTrailUrl = this.settings.dataSources["analytics-trail"];
+				auditTrailUrl = auditTrailUrl.split(" ").filter(e => e && e)[1];
+
+				const response = await this.httpFetch(
+					"post",
+					auditTrailUrl,
+					{ ...params, dbName: "teller" }
+				);
+				console.log(response);
 
 				return {
 					message: await this.aesEncrypt({ success: true }, publicKey)
@@ -104,7 +116,60 @@ module.exports = {
 		},
 		sendAnalytics: {
 			async handler (ctx){
-				return;     
+				const { payload, transactionType } = ctx.params;
+
+
+				let auditTrailUrl = this.settings.dataSources["analytics-txns"];
+				auditTrailUrl = auditTrailUrl.split(" ").filter(e => e && e)[1];
+
+				const username = payload?.requestParams?.payload?.username || ctx.meta?.user?.username || "";
+				const isAuthenticated = await this.fetchCacheSession({ 
+					appName: this.settings.appName, 
+					username
+				});
+				try {
+					let floatAccount, agentName, phoneNumber, agentNumber, outletCode, operatorCode, businessName, branchName, outletName, operatorCity, operatorRegion;
+					if(isAuthenticated.success){
+						const { accountDetails } = isAuthenticated.userData;
+						floatAccount = isAuthenticated.userData.floatAccount.toString();
+						agentName = accountDetails.personalInfo.agentName;
+						phoneNumber = accountDetails.personalInfo.phoneNumber;
+						agentNumber = accountDetails.agentInfo.agentNumber;
+						outletCode = accountDetails.agentInfo.outletCode;
+						operatorCode = accountDetails.agentInfo.operatorCode;
+						businessName = accountDetails.agentInfo.businessName;
+						branchName = accountDetails.agentInfo.branchName;
+						outletName = accountDetails.agentInfo.branchName;
+						operatorCity = accountDetails.agentInfo.operatorCity;
+						operatorRegion = accountDetails.agentInfo.operatorRegion;
+					}
+					let params = {
+						...payload,
+						username,
+						floatAccount,
+						phoneNumber,
+						agentNumber,
+						outletCode,
+						operatorCode,
+						businessName,
+						branchName,
+						outletName,
+						operatorCity,
+						operatorRegion,
+						agentName
+					};
+
+					const response = await this.httpFetch(
+						"post",
+						auditTrailUrl,
+						{ payload: params, transactionType, dbName: "teller" }
+					);
+
+					return response;     
+				} catch (error) {
+					console.error(error);
+					return {};
+				}
 			}
 		}
 	},
@@ -138,8 +203,28 @@ module.exports = {
 
 		}
 	},
-	methods     : {},
+	methods: {
+		async apiSettings () {
+			let keys = [
+				[this.settings.appName, "config", "config"].join(":")
+			];
+			let redis_data = await this.RedisGetMany(keys);
+
+			let apiConfig = redis_data.config;
+			const response = { dataSources: apiConfig["data-sources"] };
+
+			return response;
+		}
+	},
 	created		 () {},
-	async started() {},
-	async stopped() {}
+	async started() {
+		//Set API settings from redis
+		const { dataSources} = await this.apiSettings();
+		this.settings.dataSources = dataSources;
+		console.log(`Receipt settings loaded successfully to cache. API calls:::: ${dataSources.baseURL}`);
+	},
+	async stopped() {
+		this.settings.dataSources = {};
+		console.log("API settings removed successfully from cache:::");
+	}
 };

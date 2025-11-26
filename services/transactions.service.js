@@ -154,8 +154,8 @@ module.exports = {
 						logData.clientResponse = `${serviceName} successful`;
 						if(feedback.success){
 							logData["esb-request"]["data"] = {};
-							logData["requestParams"]["payload"] = {};
-							logData["esb-request"]["request"]["data"] = {};
+							// logData["requestParams"]["payload"] = {};
+							// logData["esb-request"]["request"]["data"] = {};
 						}
 					}
 
@@ -172,7 +172,9 @@ module.exports = {
                 
 				ctx.emit("create.log", logData);
 				// send analytics
-				ctx.call("logger.sendAnalytics", { payload: logData, transactionType: payload.transactionType, runAnalytics: env["enable-analytics"] });
+				if( payload.transactionType !== "customer-audit-trail"){
+					ctx.call("logger.sendAnalytics", { payload: logData, transactionType: payload.transactionType, runAnalytics: env["enable-analytics"] });
+				}
 
 				console.log(JSON.stringify({feedback}, null, 4));
 				return feedback;

@@ -5,15 +5,22 @@ const path = require("path");
 
 const env = require("../env.json");
 const UtilitiesMixin = require("../mixins/utilities.mixin");
+const RedisCacheMixin = require("../mixins/cache.mixin");
 const publicKey = fs.readFileSync(path.resolve("./public.pem"), { encoding: "utf-8" });
 
 let googleReptcha = env.googleReptchaAuth;
 let googleSecret = env.reptchaSecretKey;
+let enableWhiltelist = env.enableWhiltelist;
 
 module.exports = {
 	name    : "auth",
-	settings: {},
-	mixins: [ UtilitiesMixin ],
+
+	settings: { 
+		appName: "eef-teller-api" 
+	},
+
+	mixins: [ UtilitiesMixin, RedisCacheMixin ],
+
 	actions : {
 		authToken: {
 			async handler (ctx) {
@@ -44,6 +51,20 @@ module.exports = {
 
 				if(!passedRecaptcha.success){
 					logData.type = "error-bot";
+					ctx.emit( "create.log", logData);
+
+					return {
+						message: await this.aesEncrypt({
+							message: "Login Failed. Try again.."
+						}, publicKey)
+					};
+				}
+
+				//whitelisting public users
+				const whitelistKey = `${this.settings.appName}:config:whitelist`;
+				const userExists = await this.RedisExistsInSet(whitelistKey, payload.username);
+				if(enableWhiltelist && !userExists){
+					logData.type = "error-access";
 					ctx.emit( "create.log", logData);
 
 					return {
