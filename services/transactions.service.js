@@ -42,7 +42,7 @@ module.exports = {
 			async handler(ctx) {
 				let { payload } = ctx.params;
 
-				console.log(">>>>>>>>>>>>>>>>>>>",JSON.stringify({params: ctx.params, payload}, null, 4));
+				// console.log(">>>>>>>>>>>>>>>>>>>",JSON.stringify({params: ctx.params, payload}, null, 4));
 
 				let feedback = {
 					success: false,
@@ -113,7 +113,7 @@ module.exports = {
 
 							let reqResponse = await this.sendRequest(reqEnpoint, serviceData);
 
-							console.log(JSON.stringify({ reqResponse}, null, 4));
+							// console.log(JSON.stringify({ reqResponse}, null, 4));
 
 							//Build Reponse
 							feedback.status 		= reqResponse.message;
@@ -176,7 +176,7 @@ module.exports = {
 					ctx.call("logger.sendAnalytics", { payload: logData, transactionType: payload.transactionType, runAnalytics: env["enable-analytics"] });
 				}
 
-				console.log(JSON.stringify({feedback}, null, 4));
+				// console.log(JSON.stringify({feedback}, null, 4));
 				return feedback;
 			}
 		},

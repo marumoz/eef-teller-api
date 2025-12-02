@@ -1,8 +1,8 @@
 {
     "data-sources": {
-		"baseURL"			: "http://10.124.20.14:8080",
-		"analytics-trail"   : "post https://10.124.20.10:5005/eef-analytics-api/main/teller-audit-trail",
-		"analytics-txns"    : "post https://10.124.20.10:5005/eef-analytics-api/main/teller-transactions",
+		"baseURL"			: "https://moneyphoneesb.expressexchangefinancial.cm/",
+		"analytics-trail"   : "post http://localhost:4002/eef-analytics-api/main/teller-audit-trail",
+		"analytics-txns"    : "post http://localhost:4002/eef-analytics-api/main/teller-transactions",
 		"default"			: "POST /EEF_ESBServlet/Main",
 		"jwtToken"			: "post /EEF_ESBServlet/Auth",
 		"token-lookup"		: "post /EEF_TokenLookup/Main",
@@ -31,6 +31,7 @@
 		"channel": "POS"
 	},
 	"permissions": {
+		"enableWhitelist": false,
 		"base64": false,
 		"encrypt": false
 	}

@@ -10,13 +10,13 @@ const publicKey = fs.readFileSync(path.resolve("./public.pem"), { encoding: "utf
 
 let googleReptcha = env.googleReptchaAuth;
 let googleSecret = env.reptchaSecretKey;
-let enableWhiltelist = env.enableWhiltelist;
 
 module.exports = {
 	name    : "auth",
 
 	settings: { 
-		appName: "eef-teller-api" 
+		appName: "eef-teller-api",
+        permissions: { enableWhitelist: true }
 	},
 
 	mixins: [ UtilitiesMixin, RedisCacheMixin ],
@@ -47,8 +47,6 @@ module.exports = {
 				let passedRecaptcha = await this.verifyRecaptcha(payload, ctx.meta.clientIp);
 				logData.googleAuthResponse = passedRecaptcha;
 
-				console.log({payload, passedRecaptcha});
-
 				if(!passedRecaptcha.success){
 					logData.type = "error-bot";
 					ctx.emit( "create.log", logData);
@@ -63,7 +61,7 @@ module.exports = {
 				//whitelisting public users
 				const whitelistKey = `${this.settings.appName}:config:whitelist`;
 				const userExists = await this.RedisExistsInSet(whitelistKey, payload.username);
-				if(enableWhiltelist && !userExists){
+				if(this.settings.permissions.enableWhitelist && !userExists){
 					logData.type = "error-access";
 					ctx.emit( "create.log", logData);
 
@@ -139,6 +137,17 @@ module.exports = {
 	},
 
 	methods: {
+		async apiSettings () {
+			let keys = [
+				[this.settings.appName, "config", "config"].join(":")
+			];
+			let redis_data = await this.RedisGetMany(keys);
+
+			let apiConfig = redis_data.config;
+			const response = { permissions: apiConfig["permissions"] };
+
+			return response;
+		},
 		async verifyRecaptcha (payload, clientIp) {
 			let success = false;
 
@@ -151,5 +160,15 @@ module.exports = {
 
 			return { success, data: res.data };
 		}
+	},
+	async started() {
+		//Set API settings from redis
+		const { permissions} = await this.apiSettings();
+		this.settings.permissions = permissions;
+		console.log(`Auth settings loaded successfully to cache. Whitelist Enabled:::: ${permissions.enableWhitelist}`);
+	},
+	async stopped() {
+		this.settings.permissions = {};
+		console.log("Auth settings removed successfully from cache:::");
 	}
 };

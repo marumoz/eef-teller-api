@@ -49,7 +49,7 @@ module.exports = {
 				let sessionId    = user_data["username"];
 				let sessionToken = user_data["accessToken"];
 
-				console.log(JSON.stringify({userToken, ipAddress, username, userTokenId, sessionToken, sessionIpAddress, sessionId, redisData: user_data}, null, 4));
+				// console.log(JSON.stringify({userToken, ipAddress, username, userTokenId, sessionToken, sessionIpAddress, sessionId, redisData: user_data}, null, 4));
 
 				if( userToken === sessionToken && 
                     ipAddress === sessionIpAddress.toString() && 

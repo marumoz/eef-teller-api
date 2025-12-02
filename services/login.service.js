@@ -8,6 +8,45 @@ const SessionMixin      = require("../mixins/session.mixin");
 const encryptionKeys    = env.encryption;
 const passwordUuid    	= encryptionKeys.passwordUuid;
 
+const allServices = {
+	"buy-airtime": "AIRTIME",
+	"alt-cash-withdrawal": "ALT_CASH_WITHDRAWAL",
+	"float-balance": "BI",
+	"eneo-postpaid-bill-payment": "BILL_PAY",
+	"eneo-prepaid-bill-payment": "BILL_PAY",
+	"startimes": "BILL_PAY",
+	"canal": "BILL_PAY",
+	"camwater": "BILL_PAY",
+	"camwater-prepaid-payment": "BILL_PAY",
+	"camwater-advance-payment": "BILL_PAY",
+	"capital-services-to-wallet": "CAPITAL",
+	"capital-services-to-bank": "CAPITAL",
+	"cash-withdrawal": "CASH_WITHDRAWAL",
+	"cash-withdrawal-core": "CASH_WITHDRAWAL",
+	"c2c-deposit": "CASH2CASH_DEPOSIT",
+	"c2c-withdrawal": "CASH2CASH_WITHDRAWAL",
+	"cash-deposit-core": "CBS_CASH_DEPOSIT",
+	"cnps": "CNPS",
+	"cash-collections": "COLLECTIONS",
+	"customs-guce": "CUSTOMS",
+	"fullstatement": "FULLSTATEMENT",
+	"dgi": "GOVT_PAYMENT",
+	"approve-mg-amend": "MG_AMEND_TXN",
+	"receive-money-gram-commit": "MG_RECEIVE_WALLET",
+	"approve-mg-reversal": "MG_REVERSE_TXN",
+	"send-money-gram-commit": "MG_SEND",
+	"money-gram-report": "MG_TXN_REPORT",
+	"ministatement": "MINISTATE",
+	"txn-report": "MINISTATE",
+	"university-of-ngaoundere-payment": "NDERE",
+	"reprint-receipt": "PRINT_RECEIPT",
+	"registration": "REG",
+	"token-withdrawal": "TOKEN_WITHDRAWAL",
+	"uds-payment": "UDS",
+	"soa-payment": "USOA",
+	"cash-deposit": "WALL_CASH_DEPOSIT"
+};
+
 module.exports = {
 	name: "login",
 
@@ -70,6 +109,7 @@ module.exports = {
                         
 						const resData = { ...res.data, sessionId: "session-id", token: jwtToken };
 						resData.accountInfo.floatAccount = this.obscureAccountNumber(resData.accountInfo.floatAccount);
+                        resData.mgInfo = {};
 						response = {
 							success     : true,
 							data        : resData,
@@ -355,7 +395,7 @@ module.exports = {
 
 				let response = {
 					success     :false,
-					message     :"session authentication failed"
+					message     :"transaction authorization failed"
 				};
 
 				const isAuthenticated = await this.tokenAuthentication({ 
@@ -365,8 +405,19 @@ module.exports = {
 					userToken: ctx.meta.token, 
 					userTokenId: username
 				});
+                // console.log("Authorizing transaction>>>>>>>", transactionType, allServices[transactionType]);
 
-				if(isAuthenticated.success){
+				let isAuthorized = isAuthenticated.success;
+				const agentServices = isAuthenticated?.userData?.accountDetails?.permissionsInfo?.services || [];
+				if(isAuthorized && allServices[transactionType] && !agentServices.includes(allServices[transactionType])){
+					isAuthorized = false;
+					response = {
+						success: false,
+						message: "service is not included in the agent's profile"
+					};
+				}
+
+				if(isAuthorized){
 					const meta = {
 						username,
 						agentName: isAuthenticated.userData.accountDetails.personalInfo.agentName,

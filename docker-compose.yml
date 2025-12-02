@@ -2,7 +2,7 @@
 x-teller-api-common-services: &teller-api-common-services
   build:
     context: .
-  image: pascaleef/eef-teller-api:dev
+  image: pascaleef/eef-teller-api:latest
   env_file: docker-compose.env
   depends_on:
     - teller-nats
@@ -16,9 +16,9 @@ services:
     container_name: eef-teller-api-gateway
     environment:
       SERVICES: api
-      PORT: 5001
+      PORT: 4000
     ports:
-      - "5001:5001"
+      - "4000:4000"
     networks:
       - teller
 
@@ -47,6 +47,24 @@ services:
   teller-transactions:
     <<: *teller-api-common-services
     container_name: eef-teller-api-transactions
+    environment:
+      SERVICES: transactions
+
+  teller-transactions-replica:
+    <<: *teller-api-common-services
+    container_name: eef-teller-api-transactions-replica
+    environment:
+      SERVICES: transactions
+
+  teller-transactions-replica-two:
+    <<: *teller-api-common-services
+    container_name: eef-teller-api-transactions-replica-two
+    environment:
+      SERVICES: transactions
+
+  teller-transactions-replica-three:
+    <<: *teller-api-common-services
+    container_name: eef-teller-api-transactions-replica-three
     environment:
       SERVICES: transactions
 

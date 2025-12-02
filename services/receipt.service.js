@@ -65,7 +65,7 @@ module.exports = {
 
 				let reqResponse = await this.sendRequest("post", dwldReceiptUrl, payload);
 
-				console.log({payload, reqResponse});
+				// console.log({payload, reqResponse});
 				return reqResponse.data;
 
 			}

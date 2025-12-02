@@ -54,7 +54,7 @@ module.exports = {
 				//return client;			
 			}
 			catch ( e ) {
-				console.log ( { REDIS_CONNECTION_ERROR: e } );
+				console.error({ REDIS_CONNECTION_ERROR: e });
 				return false;
 			}
 		},

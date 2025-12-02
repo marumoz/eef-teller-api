@@ -164,6 +164,7 @@ module.exports = {
 						auditTrailUrl,
 						{ payload: params, transactionType, dbName: "teller" }
 					);
+                    console.log(response);
 
 					return response;     
 				} catch (error) {
