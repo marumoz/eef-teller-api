@@ -43,6 +43,170 @@
 					}
 				}
 			},
+			"tontine-group-withdrawal": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "010000",
+					"field4": "__amount",
+					"field24": "MM",
+					"field65": "__memberPhoneNumber",
+					"field68": "Bill Payment",
+					"field80": "__tokenNumber",
+					"field100": "GROUP_TOKEN_WITHDRAWAL",
+					"field101": "__outletCode",
+					"field102": "__floatAccount",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__memberPhoneNumber",
+					"field121": "__groupPhone",
+					"field125": "__memberName",
+					"field126": "__groupName",
+					"field127": "__presentmentData"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"tontine-group-deposit": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "210000",
+					"field4": "__amount",
+					"field24": "MM",
+					"field65": "__memberPhoneNumber",
+					"field68": "Bill Payment",
+					"field80": "__tokenNumber",
+					"field100": "GROUP_TOKEN_DEPOSIT",
+					"field101": "__outletCode",
+					"field102": "__floatAccount",
+					"field103": "__groupAccount",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__memberPhoneNumber",
+					"field121": "__groupPhone",
+					"field125": "__memberName",
+					"field126": "__groupName",
+					"field127": "__presentmentData"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"tontine-withdrawal-lookup": {
+				"override-source": "token-lookup",
+				"remove-template": true,
+				"request": {
+					"requestType": "GROUP_TOKEN_TRANSFER",
+                    "Token": "__tokenNumber"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"tontine-deposit-lookup": {
+				"override-source": "token-lookup",
+				"remove-template": true,
+				"request": {
+					"requestType": "GROUP_TOKEN_DEPOSIT",
+                    "Token": "__tokenNumber"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"tresor-pay-payment": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "500000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field65": "__referenceNumber",
+					"field68": "Bill Payment",
+					"field71": "__senderId",
+					"field100": "TRESORPAY",
+					"field101": "__outletCode",
+					"field102": "__floatAccount",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__senderPhoneNumber",
+					"field125": "__senderName",
+					"field127": "__presentmentData"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"tresor-pay-lookup": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "180000",
+					"field4": "0",
+					"field24": "MM",
+					"field65": "__reference",
+					"field68": "TresorPay Lookup",
+					"field75": "__clientIp",
+					"field98": "TRESORPAY",
+					"field100": "BILL_PRESENTMENT",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
 			"get-occupations": {
 				"override-source": "get-occupations",
 				"remove-template": true,
@@ -2574,7 +2738,8 @@
 					"field120": "__phoneNumber",
 					"field121": "__customerPhoneNumber",
 					"field125": "__agentName",
-					"field126": "__customerName"
+					"field126": "__customerName",
+					"branch103": "__creditBranchCode"
 				},
 				"response": {
 					"status": {
@@ -2797,6 +2962,102 @@
 					"field120": "__phoneNumber",
 					"field125": "__agentName",
 					"branch102": "__branchCode"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"tontine-group-withdrawal-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "MM",
+					"field73": "010000",
+					"field74": "GROUP_TOKEN_WITHDRAWAL",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__floatAccount"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"tontine-group-deposit-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "MM",
+					"field73": "210000",
+					"field74": "GROUP_TOKEN_DEPOSIT",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__floatAccount"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"tresor-pay-payment-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "MM",
+					"field73": "500000",
+					"field74": "TRESORPAY",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__floatAccount"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"alt-cash-withdrawal-cbs-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "MM",
+					"field73": "010000",
+					"field74": "ALT_CASH_WITHDRAWAL_CBS",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__floatAccount"
 				},
 				"response": {
 					"status": {

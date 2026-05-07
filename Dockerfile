@@ -14,6 +14,8 @@ ENV NODE_ENV=production
 
 WORKDIR /app
 
+RUN apk add --no-cache wget
+
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app ./
 

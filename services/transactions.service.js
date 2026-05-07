@@ -42,7 +42,9 @@ module.exports = {
 			async handler(ctx) {
 				let { payload } = ctx.params;
 
-				// console.log(">>>>>>>>>>>>>>>>>>>",JSON.stringify({params: ctx.params, payload}, null, 4));
+                if(env.environment !== 'production'){
+                    console.log(">>>>>>>>>>>>>>>>>>>",JSON.stringify({params: ctx.params, payload}, null, 4));
+                }
 
 				let feedback = {
 					success: false,
@@ -72,12 +74,12 @@ module.exports = {
 				let isAuthorized = await ctx.call("transactions.verifyTransaction", { payload });
                 
 				if(!isAuthorized.success){
-					logData.response = feedback;
+					logData.response = isAuthorized;
 					logData.type = "error";
 					logData.response = "Failed user validation session";
 					ctx.emit("create.log", logData);
                     
-					return feedback;
+					return isAuthorized;
 				}
 
 				try {
@@ -89,8 +91,8 @@ module.exports = {
 						clientIp,
 						deviceType: ctx.meta.userDevice?.deviceType || "Computer",
 						deviceInfo: `${userDevice.osName} ${userDevice.deviceType} ${userDevice.brand} ${userDevice.clientType} ${userDevice.clientName}`,
-						...isAuthorized.meta,
 						...requestData,
+						...isAuthorized.meta,
 						floatAccount: isAuthorized?.floatAccount || ""
 					};
 
@@ -113,7 +115,9 @@ module.exports = {
 
 							let reqResponse = await this.sendRequest(reqEnpoint, serviceData);
 
-							// console.log(JSON.stringify({ reqResponse}, null, 4));
+                            if(env.environment !== 'production'){
+                                console.log(JSON.stringify({ reqResponse}, null, 4));
+                            }
 
 							//Build Reponse
 							feedback.status 		= reqResponse.message;
@@ -176,7 +180,9 @@ module.exports = {
 					ctx.call("logger.sendAnalytics", { payload: logData, transactionType: payload.transactionType, runAnalytics: env["enable-analytics"] });
 				}
 
-				// console.log(JSON.stringify({feedback}, null, 4));
+                if(env.environment !== 'production'){
+				    console.log(JSON.stringify({feedback}, null, 4));
+                }
 				return feedback;
 			}
 		},

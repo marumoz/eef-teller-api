@@ -1,9 +1,11 @@
 "use strict";
 
+const moment = require("moment");
+const path = require("path");
+
 const RedisCacheMixin   = require("./cache.mixin");
 const UtilitiesMixin    = require("./utilities.mixin");
-const env               = require("../env.json");
-const moment 		    = require("moment");
+const env = require( path.resolve("./env.json") );
 
 const sessionExpiry    = env.sessionExpiryInSeconds;
 

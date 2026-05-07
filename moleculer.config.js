@@ -29,7 +29,7 @@
  */
 module.exports = {
 	// Namespace of nodes to segment your nodes on the same network.
-	namespace: "",
+	namespace: "EEF-TELLER-API",
 	// Unique node identifier. Must be unique in a namespace.
 	nodeID: null,
 	// Custom metadata store. Store here what you want. Accessing: `this.broker.metadata`
@@ -45,7 +45,7 @@ module.exports = {
 			// Print module names with different colors (like docker-compose for containers)
 			moduleColors: false,
 			// Line formatter. It can be "json", "short", "simple", "full", a `Function` or a template string like "{timestamp} {level} {nodeID}/{mod}: {msg}"
-			formatter: "full",
+			formatter: "json",
 			// Custom object printer. If not defined, it uses the `util.inspect` method.
 			objectPrinter: null,
 			// Auto-padding the module name in order to messages begin at the same column.
@@ -166,7 +166,8 @@ module.exports = {
 				// Default labels which are appended to all metrics labels
 				defaultLabels: registry => ({
 					namespace: registry.broker.namespace,
-					nodeID: registry.broker.nodeID
+					nodeID: registry.broker.nodeID,
+                    service: registry.broker.serviceList
 				})
 			}
 		}

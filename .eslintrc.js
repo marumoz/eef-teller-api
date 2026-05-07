@@ -24,7 +24,7 @@ module.exports = {
 			"warn"
 		],
 		"no-mixed-spaces-and-tabs": [
-			"warn"
+			"off"
 		]
 	}
 };

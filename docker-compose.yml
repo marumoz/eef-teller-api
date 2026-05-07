@@ -2,13 +2,27 @@
 x-teller-api-common-services: &teller-api-common-services
   build:
     context: .
-  image: pascaleef/eef-teller-api:latest
+  image: pascaleef/eef-teller-api:dev
   env_file: docker-compose.env
   depends_on:
     - teller-nats
   networks:
     - teller
+  logging:
+    driver: "json-file"
+    options:
+      max-size: "10m"
+      max-file: "10"
   restart: unless-stopped
+  labels:
+    app: "teller"
+    env: "dev"
+    stack: "moleculer"
+  healthcheck:
+    test: ["CMD", "wget", "-qO-", "http://localhost:3030/metrics"]
+    interval: 30s
+    timeout: 5s
+    retries: 3
 
 services:
   teller-api:
@@ -16,23 +30,39 @@ services:
     container_name: eef-teller-api-gateway
     environment:
       SERVICES: api
-      PORT: 4000
+      PORT: 5001
     ports:
-      - "4000:4000"
-    networks:
-      - teller
+      - "5001:5001"
+    volumes:
+      - ./env.json:/app/env.json:ro
+    labels:
+      prometheus: "true"
+      service: "api"
+      role: "gateway"
 
   teller-auth:
     <<: *teller-api-common-services
     container_name: eef-teller-api-auth
     environment:
       SERVICES: auth
+    volumes:
+      - ./env.json:/app/env.json:ro
+    labels:
+      prometheus: "true"
+      service: "auth"
+      role: "worker"
 
   teller-login:
     <<: *teller-api-common-services
     container_name: eef-teller-api-login
     environment:
       SERVICES: login
+    volumes:
+      - ./env.json:/app/env.json:ro
+    labels:
+      prometheus: "true"
+      service: "login"
+      role: "worker"
 
   teller-receipt:
     <<: *teller-api-common-services
@@ -40,33 +70,66 @@ services:
     environment:
       SERVICES: receipt
     volumes:
+      - ./env.json:/app/env.json:ro
       - /srv/applications/teller/teller-api/store/cash-withdrawal/:/app/store/cash-withdrawal/
       - /srv/applications/teller/teller-api/store/customer-registration/:/app/store/customer-registration/
       - /srv/applications/teller/teller-api/store/mgdocs/:/app/store/mgdocs/
+    labels:
+      prometheus: "true"
+      service: "receipt"
+      role: "worker"
 
   teller-transactions:
     <<: *teller-api-common-services
     container_name: eef-teller-api-transactions
     environment:
       SERVICES: transactions
+      NODE_ID: transactions-${HOSTNAME}
+    volumes:
+      - ./env.json:/app/env.json:ro
+    labels:
+      prometheus: "true"
+      service: "transactions"
+      role: "worker"
 
   teller-transactions-replica:
     <<: *teller-api-common-services
     container_name: eef-teller-api-transactions-replica
     environment:
       SERVICES: transactions
+      NODE_ID: transactions-${HOSTNAME}
+    volumes:
+      - ./env.json:/app/env.json:ro
+    labels:
+      prometheus: "true"
+      service: "transactions"
+      role: "worker"
 
   teller-transactions-replica-two:
     <<: *teller-api-common-services
     container_name: eef-teller-api-transactions-replica-two
     environment:
       SERVICES: transactions
+      NODE_ID: transactions-${HOSTNAME}
+    volumes:
+      - ./env.json:/app/env.json:ro
+    labels:
+      prometheus: "true"
+      service: "transactions"
+      role: "worker"
 
   teller-transactions-replica-three:
     <<: *teller-api-common-services
     container_name: eef-teller-api-transactions-replica-three
     environment:
       SERVICES: transactions
+      NODE_ID: transactions-${HOSTNAME}
+    volumes:
+      - ./env.json:/app/env.json:ro
+    labels:
+      prometheus: "true"
+      service: "transactions"
+      role: "worker"
 
   teller-logger:
     <<: *teller-api-common-services
@@ -74,7 +137,12 @@ services:
     environment:
       SERVICES: logger
     volumes:
+      - ./env.json:/app/env.json:ro
       - /srv/applications/logs/teller_api/:/srv/applications/logs/teller_api/
+    labels:
+      prometheus: "true"
+      service: "logger"
+      role: "worker"
 
   teller-nats:
     image: nats:2
@@ -82,7 +150,94 @@ services:
     networks:
       - teller
     restart: unless-stopped
+    labels:
+      app: "teller"
+      service: "nats"
+      env: "dev"
+
+  teller-prometheus:
+    image: prom/prometheus
+    container_name: eef-teller-api-prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - teller
+    ports:
+      - "9090:9090"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:9090/-/healthy"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    labels:
+      app: "teller"
+      service: "prometheus"
+      env: "dev"
+
+  teller-grafana:
+    image: grafana/grafana
+    container_name: eef-teller-api-grafana
+    ports:
+      - "9091:3000"
+    networks:
+      - teller
+    restart: unless-stopped
+    depends_on:
+      - teller-prometheus
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    labels:
+      app: "teller"
+      service: "grafana"
+      env: "dev"
+
+  teller-loki:
+    image: grafana/loki
+    container_name: eef-teller-api-loki
+    networks:
+      - teller
+    restart: unless-stopped
+    ports:
+      - "9092:3100"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3100/ready"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    labels:
+      app: "teller"
+      service: "loki"
+      env: "dev"
+
+  teller-promtail:
+    image: grafana/promtail
+    container_name: eef-teller-api-promtail
+    networks:
+      - teller
+    restart: unless-stopped
+    depends_on:
+      - teller-loki
+    volumes:
+      - ./promtail-config.yml:/etc/promtail/config.yml
+      - /var/log:/var/log
+      - /var/lib/docker/containers:/var/lib/docker/containers
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /srv/applications/logs/teller_api:/srv/applications/logs/teller_api
+    command: -config.file=/etc/promtail/config.yml
+    labels:
+      app: "teller"
+      service: "promtail"
+      env: "dev"
 
 networks:
   teller:
     driver: bridge
+
+volumes:
+  grafana-storage:

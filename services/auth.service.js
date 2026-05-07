@@ -3,7 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const env = require("../env.json");
+const env = require( path.resolve("./env.json") );
 const UtilitiesMixin = require("../mixins/utilities.mixin");
 const RedisCacheMixin = require("../mixins/cache.mixin");
 const publicKey = fs.readFileSync(path.resolve("./public.pem"), { encoding: "utf-8" });
@@ -61,7 +61,7 @@ module.exports = {
 				//whitelisting public users
 				const whitelistKey = `${this.settings.appName}:config:whitelist`;
 				const userExists = await this.RedisExistsInSet(whitelistKey, payload.username);
-				if(this.settings.permissions.enableWhitelist && !userExists){
+				if(env?.enableWhitelist && !userExists){ //this.settings.permissions.enableWhitelist
 					logData.type = "error-access";
 					ctx.emit( "create.log", logData);
 

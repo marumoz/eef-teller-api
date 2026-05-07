@@ -3,8 +3,10 @@
 const ApiGateway = require("moleculer-web");
 const helmet = require("helmet");
 const DeviceDetector = require("node-device-detector");
+const path = require("path");
+
 const detector = new DeviceDetector();
-const env = require("../env.json");
+const env = require( path.resolve("./env.json") );
 
 /**
  * @typedef {import('moleculer').ServiceSchema} ServiceSchema Moleculer's Service Schema

@@ -1,4 +1,30 @@
 {
+    "tontine-group-withdrawal": {
+        "phoneNumber": "string",
+        "amount": "string",
+        "tokenNumber": "string"
+    },
+    "tontine-group-deposit": {
+        "phoneNumber": "string",
+        "amount": "string",
+        "tokenNumber": "string"
+    },
+    "tontine-withdrawal-lookup": {
+        "tokenNumber": "string"
+    },
+    "tontine-deposit-lookup": {
+        "tokenNumber": "string"
+    },
+    "tresor-pay-payment": {
+        "phoneNumber": "string",
+        "amount": "string",
+        "referenceNumber": "string"
+    },
+    "tresor-pay-lookup": {
+        "phoneNumber": "string",
+        "username": "string",
+        "reference": "string"
+    },
     "get-occupations": {
         "phoneNumber": "string"
     },
@@ -731,6 +757,26 @@
         "agentCode": "string",
         "outletCode": "string",
         "operatorCode": "string"
+    },
+    "tontine-group-withdrawal-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "floatAccount": "string"
+    },
+    "tontine-group-deposit-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "floatAccount": "string"
+    },
+    "tresor-pay-payment-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "floatAccount": "string"
+    },
+    "alt-cash-withdrawal-cbs-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "floatAccount": "string"
     },
     "alt-cash-withdrawal-charges": {
         "phoneNumber": "string|length:12",

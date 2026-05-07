@@ -8,7 +8,7 @@ const fs                = require("fs");
 const path              = require("path");
 const crypto            = require("crypto");
 
-const env               = require("../env.json");
+const env = require( path.resolve("./env.json") );
 const encryptionKeys    = env.encryption;
 const apiTimeout        = env.api.timeout;
 const JWT_SECRET        = env.encryption.JWT_SECRET;

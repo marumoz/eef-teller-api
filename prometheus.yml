@@ -1,0 +1,20 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: "moleculer-services"
+    static_configs:
+      - targets:
+          - teller-api:3030
+          - teller-auth:3030
+          - teller-login:3030
+          - teller-receipt:3030
+          - teller-transactions:3030
+          - teller-transactions-replica:3030
+
+    relabel_configs:
+      - target_label: "job"
+        replacement: "moleculer"
+
+      - target_label: "env"
+        replacement: "production"

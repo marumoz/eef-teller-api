@@ -1,12 +1,14 @@
 "use strict";
 
-const CryptoJS          = require("crypto-js");
-const env               = require("../env.json");
-const UtilitiesMixin    = require("../mixins/utilities.mixin");
-const SessionMixin      = require("../mixins/session.mixin");
+const CryptoJS = require("crypto-js");
+const path = require("path");
 
-const encryptionKeys    = env.encryption;
-const passwordUuid    	= encryptionKeys.passwordUuid;
+const env = require( path.resolve("./env.json") );
+const UtilitiesMixin = require("../mixins/utilities.mixin");
+const SessionMixin = require("../mixins/session.mixin");
+
+const encryptionKeys = env.encryption;
+const passwordUuid = encryptionKeys.passwordUuid;
 
 const allServices = {
 	"buy-airtime": "AIRTIME",
@@ -44,6 +46,7 @@ const allServices = {
 	"token-withdrawal": "TOKEN_WITHDRAWAL",
 	"uds-payment": "UDS",
 	"soa-payment": "USOA",
+	"tresor-pay-payment": "TRESORPAY",
 	"cash-deposit": "WALL_CASH_DEPOSIT"
 };
 
@@ -395,7 +398,7 @@ module.exports = {
 
 				let response = {
 					success     :false,
-					message     :"transaction authorization failed"
+					message     :"transaction authentication failed"
 				};
 
 				const isAuthenticated = await this.tokenAuthentication({ 
@@ -413,7 +416,7 @@ module.exports = {
 					isAuthorized = false;
 					response = {
 						success: false,
-						message: "service is not included in the agent's profile"
+						message: "transaction authorization failed. Service is not included in the agent's profile"
 					};
 				}
 

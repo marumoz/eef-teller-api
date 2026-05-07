@@ -107,7 +107,7 @@ module.exports = {
 					auditTrailUrl,
 					{ ...params, dbName: "teller" }
 				);
-				console.log(response);
+                console.log({auditTrailUrl, response});
 
 				return {
 					message: await this.aesEncrypt({ success: true }, publicKey)
@@ -164,7 +164,7 @@ module.exports = {
 						auditTrailUrl,
 						{ payload: params, transactionType, dbName: "teller" }
 					);
-                    console.log(response);
+                    console.log({auditTrailUrl, response});
 
 					return response;     
 				} catch (error) {

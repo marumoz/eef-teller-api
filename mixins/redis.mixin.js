@@ -1,7 +1,9 @@
 "use strict";
 
-const redisConn = require("../env.json");
-const Redis     = require("ioredis");
+const Redis = require("ioredis");
+const path = require("path");
+
+const redisConn = require( path.resolve("./env.json") );
 
 module.exports = {
 	name: "redis_lib_mixin",
