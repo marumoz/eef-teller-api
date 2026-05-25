@@ -84,7 +84,7 @@ services:
     container_name: eef-teller-api-transactions
     environment:
       SERVICES: transactions
-      NODE_ID: transactions-${HOSTNAME}
+      NODE_ID: transactions-1
     volumes:
       - ./env.json:/app/env.json:ro
     labels:
@@ -97,7 +97,7 @@ services:
     container_name: eef-teller-api-transactions-replica
     environment:
       SERVICES: transactions
-      NODE_ID: transactions-${HOSTNAME}
+      NODE_ID: transactions-2
     volumes:
       - ./env.json:/app/env.json:ro
     labels:
@@ -110,7 +110,7 @@ services:
     container_name: eef-teller-api-transactions-replica-two
     environment:
       SERVICES: transactions
-      NODE_ID: transactions-${HOSTNAME}
+      NODE_ID: transactions-3
     volumes:
       - ./env.json:/app/env.json:ro
     labels:
@@ -123,7 +123,7 @@ services:
     container_name: eef-teller-api-transactions-replica-three
     environment:
       SERVICES: transactions
-      NODE_ID: transactions-${HOSTNAME}
+      NODE_ID: transactions-4
     volumes:
       - ./env.json:/app/env.json:ro
     labels:
@@ -205,6 +205,10 @@ services:
     restart: unless-stopped
     ports:
       - "9092:3100"
+    command: -config.file=/etc/loki/config.yml
+    volumes:
+      - ./loki-config.yml:/etc/loki/config.yml
+      - loki-data:/loki
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3100/ready"]
       interval: 30s
@@ -241,3 +245,4 @@ networks:
 
 volumes:
   grafana-storage:
+  loki-data:

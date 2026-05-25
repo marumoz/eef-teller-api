@@ -23,7 +23,8 @@
     "tresor-pay-lookup": {
         "phoneNumber": "string",
         "username": "string",
-        "reference": "string"
+        "referenceType": "string",
+        "referenceNumber": "string"
     },
     "get-occupations": {
         "phoneNumber": "string"

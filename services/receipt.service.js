@@ -58,6 +58,15 @@ module.exports = {
 					};
 				}
 				let dwldReceiptUrl = this.settings.dataSources["download-receipt"].split(" ").filter(e => e && e)[1];
+                if(payload.type === 'tresorpay-quitius-download'){
+                    dwldReceiptUrl = this.settings.dataSources["tresorpay-receipt"].split(" ").filter(e => e && e)[1];
+                }
+                if(payload.type === 'tresorpay-quitius-download' && payload.referenceType === 'numero_declaration'){
+                    payload = { numero_declaration: payload.referenceNumber };
+                }
+                if(payload.type === 'tresorpay-quitius-download' && payload.referenceType === 'unique_code'){
+                    payload = { unique_code: payload.referenceNumber };
+                }
 				//handle base url
 				if(!dwldReceiptUrl.startsWith("http") && this.settings.dataSources.baseURL){
 					dwldReceiptUrl = `${this.settings.dataSources.baseURL}${dwldReceiptUrl}`;
@@ -65,7 +74,7 @@ module.exports = {
 
 				let reqResponse = await this.sendRequest("post", dwldReceiptUrl, payload);
 
-				// console.log({payload, reqResponse});
+				console.log({payload, dwldReceiptUrl, reqResponse});
 				return reqResponse.data;
 
 			}

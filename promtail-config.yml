@@ -49,6 +49,13 @@ scrape_configs:
             time: time
             service: service
 
+      - timestamp:
+          source: time
+          format: RFC3339
+
+      - drop:
+          older_than: 168h
+
       - labels:
           level:
 
