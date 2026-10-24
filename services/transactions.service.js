@@ -123,7 +123,7 @@ module.exports = {
 							feedback.status 		= reqResponse.message;
 							feedback.success 		= reqResponse.success;
 							feedback.message 	    = reqResponse.errorMessage || statusMessages[reqResponse.message];
-							feedback.data 			= this.applyPosthooks(reqResponse.data, { ...serviceData, transactionType: serviceName });
+							feedback.data 			= this.applyPosthooks(reqResponse.data, { ...serviceData, transactionType: serviceName, request:  reqResponse.request.data});
 
 							logData.txnType = reqEnpoint?.request?.field100 || transactionType;
 							logData["esb-request"] = { 
@@ -176,8 +176,11 @@ module.exports = {
                 
 				ctx.emit("create.log", logData);
 				// send analytics
-				if( payload.transactionType !== "customer-audit-trail"){
+				if( !["customer-audit-trail", "login"].includes(payload.transactionType)){
 					ctx.call("logger.sendAnalytics", { payload: logData, transactionType: payload.transactionType, runAnalytics: env["enable-analytics"] });
+				}
+				if( payload.transactionType === "login"){
+					feedback.logData = logData
 				}
 
                 if(env.environment !== 'production'){
@@ -737,7 +740,7 @@ module.exports = {
 				requestTime["received"] = moment().format ( "YYYY-MM-DD HH:mm:ss:SSSS");
 				let sent            = moment ( requestTime.sent,"YYYY-MM-DD HH:mm:ss:SSSS"  ),
 					received        = moment ( requestTime.received,"YYYY-MM-DD HH:mm:ss:SSSS" );
-				requestTime.latency     = `${received.diff(sent, "milliseconds")} ms`;
+				requestTime.latency     = received.diff(sent, "milliseconds");
     
 				if(response.success){
 					response = await this.parseResponse(request, response);
@@ -907,7 +910,7 @@ module.exports = {
 							let appResponse = {
 								"transSuccess": data.field39,
 								"transDescription": data.field48,
-								"transactionCode": data.field37,
+								"transactionCode": reqData.request.field37 || data.field37,
 								"transactionType": data.field100,
 								"presentmentAmt": data.field4,
 								"presentmentRef": data.field69,

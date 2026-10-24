@@ -148,6 +148,37 @@
 					}
 				}
 			},
+			"tresorpay-non-taxes-payment": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "500000",
+					"field4": "__amount",
+					"field24": "MB",
+					"field65": "__referenceNumber",
+					"field68": "Bill Payment",
+					"field71": "__senderId",
+					"field100": "TRESORPAY_RNF",
+					"field101": "__outletCode",
+					"field102": "__floatAccount",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__senderPhoneNumber",
+					"field125": "__senderName",
+					"field127": "__presentmentData"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
 			"tresor-pay-payment": {
 				"request": {
 					"field0": "0200",
@@ -167,6 +198,34 @@
 					"field120": "__senderPhoneNumber",
 					"field125": "__senderName",
 					"field127": "__presentmentData"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"tresorpay-non-tax-lookup": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "180000",
+					"field4": "0",
+					"field24": "MM",
+					"field65": "__referenceNumber",
+					"field68": "TresorPay Lookup",
+					"field75": "__clientIp",
+					"field98": "TRESORPAY_RNF",
+					"field100": "BILL_PRESENTMENT",
+					"field101": "__outletCode",
+					"field104": "__agentCode",
+					"field105": "__operatorCode"
 				},
 				"response": {
 					"status": {
@@ -258,7 +317,14 @@
                         "Withdrawal_Token": "__withdrawalToken",
                         "Agent_Number": "__agentCode",
                         "Outlet_Code": "__outletCode",
-                        "Operator_Code": "__operatorCode"
+                        "Operator_Code": "__operatorCode",
+                        "Transaction_Ref": "__originalTxnRef",
+                        "Account_No": "__customerAccount",
+                        "Customer_No": "__customerPhone",
+                        "Customer_Name": "__customerName",
+                        "Amount": "__amount",
+                        "Charge_Amount": "__charge",
+                        "Tax_Amount": "__tax"
                     }
 				},
 				"response": {
@@ -556,7 +622,7 @@
 					"field105": "__operatorCode",
 					"field120": "__phoneNumber",
 					"field125": "__agentName",
-					"field127": ""
+					"field127": "__lookupDetails"
 				},
 				"response": {
 					"status": {
@@ -684,7 +750,8 @@
 				"request": {
 					"reqType": "Reverse",
 					"data": {
-						"referenceNumber": "__referenceNumber"
+						"referenceNumber": "__referenceNumber",
+						"Amount": "__amount"
 					},
 					"request": {
 						"OperatorName": "__username",
@@ -3010,6 +3077,30 @@
 					"field24": "MM",
 					"field73": "210000",
 					"field74": "GROUP_TOKEN_DEPOSIT",
+					"field100": "CHARGE_LOOKUP",
+					"field102": "__floatAccount"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"tresorpay-non-taxes-payment-charges": {
+				"request": {
+					"field0": "0100",
+					"field2": "__phoneNumber",
+					"field3": "150000",
+					"field4": "__amount",
+					"field24": "MM",
+					"field73": "500000",
+					"field74": "TRESORPAY_RNF",
 					"field100": "CHARGE_LOOKUP",
 					"field102": "__floatAccount"
 				},

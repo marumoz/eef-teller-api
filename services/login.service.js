@@ -101,7 +101,7 @@ module.exports = {
 						const jwtToken = this.signToken({ username });
 
 						//set session data to redis
-						this.setloginSession({
+						await this.setloginSession({
 							appName: this.settings.appName, 
 							username: username, 
 							userData: res.data,
@@ -128,6 +128,11 @@ module.exports = {
 						};
 						logData.response = response;
 					}
+                    ctx.call("logger.sendAnalytics", { 
+                        payload: res.logData, 
+                        transactionType: payload.transactionType, 
+                        runAnalytics: env["enable-analytics"] 
+                    });
 				}else{
 					logData.response = response;
 					logData.type = "error";

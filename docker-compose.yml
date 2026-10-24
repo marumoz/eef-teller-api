@@ -84,7 +84,7 @@ services:
     container_name: eef-teller-api-transactions
     environment:
       SERVICES: transactions
-      NODE_ID: transactions-1
+      NODE_ID: transactions-${HOSTNAME}
     volumes:
       - ./env.json:/app/env.json:ro
     labels:
@@ -97,33 +97,7 @@ services:
     container_name: eef-teller-api-transactions-replica
     environment:
       SERVICES: transactions
-      NODE_ID: transactions-2
-    volumes:
-      - ./env.json:/app/env.json:ro
-    labels:
-      prometheus: "true"
-      service: "transactions"
-      role: "worker"
-
-  teller-transactions-replica-two:
-    <<: *teller-api-common-services
-    container_name: eef-teller-api-transactions-replica-two
-    environment:
-      SERVICES: transactions
-      NODE_ID: transactions-3
-    volumes:
-      - ./env.json:/app/env.json:ro
-    labels:
-      prometheus: "true"
-      service: "transactions"
-      role: "worker"
-
-  teller-transactions-replica-three:
-    <<: *teller-api-common-services
-    container_name: eef-teller-api-transactions-replica-three
-    environment:
-      SERVICES: transactions
-      NODE_ID: transactions-4
+      NODE_ID: transactions-${HOSTNAME}
     volumes:
       - ./env.json:/app/env.json:ro
     labels:

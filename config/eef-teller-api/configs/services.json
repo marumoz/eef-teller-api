@@ -15,9 +15,19 @@
     "tontine-deposit-lookup": {
         "tokenNumber": "string"
     },
+    "tresorpay-non-taxes-payment": {
+        "phoneNumber": "string",
+        "amount": "string",
+        "referenceNumber": "string"
+    },
     "tresor-pay-payment": {
         "phoneNumber": "string",
         "amount": "string",
+        "referenceNumber": "string"
+    },
+    "tresorpay-non-tax-lookup": {
+        "phoneNumber": "string",
+        "username": "string",
         "referenceNumber": "string"
     },
     "tresor-pay-lookup": {
@@ -99,9 +109,9 @@
         "floatAccount": "string",
         "referenceNumber": "string",
         "studentId": "string|optional",
-        "studentName": "string",
-        "year": "string",
-        "telephone": "string",
+        "studentName": "string|optional",
+        "year": "string|optional",
+        "telephone": "string|optional",
         "agentCode": "string",
         "agentName": "string",
         "outletCode": "string"
@@ -765,6 +775,11 @@
         "floatAccount": "string"
     },
     "tontine-group-deposit-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "floatAccount": "string"
+    },
+    "tresorpay-non-taxes-payment-charges": {
         "phoneNumber": "string|length:12",
         "amount": "string",
         "floatAccount": "string"

@@ -55,7 +55,7 @@ module.exports = {
 					username: decrypted.username
 				});
 				let floatAccount, agentName, phoneNumber, agentNumber, outletCode, operatorCode, businessName, branchName, outletName, operatorCity, operatorRegion;
-				if(isAuthenticated.success){
+				if(isAuthenticated.success && isAuthenticated?.userData?.accountDetails){
 					const { accountDetails } = isAuthenticated.userData;
 					floatAccount = isAuthenticated.userData.floatAccount.toString();
 					agentName = accountDetails.personalInfo.agentName;
@@ -99,15 +99,18 @@ module.exports = {
 				// ctx.call("transactions.mainRequest", { payload: params });
 				// ctx.call("analytics.usage", { payload: params.payload, runAnalytics: env["enable-analytics"] });
 
-				let auditTrailUrl = this.settings.dataSources["analytics-trail"];
-				auditTrailUrl = auditTrailUrl.split(" ").filter(e => e && e)[1];
+                /**
+                 * send analytics API if required
+                 */
+				// let auditTrailUrl = this.settings.dataSources["analytics-trail"];
+				// auditTrailUrl = auditTrailUrl.split(" ").filter(e => e && e)[1];
 
-				const response = await this.httpFetch(
-					"post",
-					auditTrailUrl,
-					{ ...params, dbName: "teller" }
-				);
-                console.log({auditTrailUrl, response});
+				// const response = await this.httpFetch(
+				// 	"post",
+				// 	auditTrailUrl,
+				// 	{ ...params, dbName: "teller" }
+				// );
+                // console.log({auditTrailUrl, response});
 
 				return {
 					message: await this.aesEncrypt({ success: true }, publicKey)
@@ -128,12 +131,13 @@ module.exports = {
 					username
 				});
 				try {
-					let floatAccount, agentName, phoneNumber, agentNumber, outletCode, operatorCode, businessName, branchName, outletName, operatorCity, operatorRegion;
-					if(isAuthenticated.success){
+					let floatAccount, agentName, phoneNumber, agentNumber, outletCode, operatorCode, businessName, branchName, outletName, operatorCity, operatorRegion, superAgentNumber;
+					if(isAuthenticated.success && isAuthenticated?.userData?.accountDetails && !["get-occupations", "raise-a-case", "money-gram-report", "txn-report", "fetch-mg-amend", "fetch-mg-reversals", "customer-audit-trail", "password-policy", "download-receipt", "get-id-types", "get-cities", "dashboard-stats", "fetch-id-types"].includes(transactionType)){
 						const { accountDetails } = isAuthenticated.userData;
-						floatAccount = isAuthenticated.userData.floatAccount.toString();
+						floatAccount = isAuthenticated.userData.floatAccount?.toString();
 						agentName = accountDetails.personalInfo.agentName;
 						phoneNumber = accountDetails.personalInfo.phoneNumber;
+						superAgentNumber = accountDetails.agentInfo.superAgentNumber;
 						agentNumber = accountDetails.agentInfo.agentNumber;
 						outletCode = accountDetails.agentInfo.outletCode;
 						operatorCode = accountDetails.agentInfo.operatorCode;
@@ -142,31 +146,36 @@ module.exports = {
 						outletName = accountDetails.agentInfo.branchName;
 						operatorCity = accountDetails.agentInfo.operatorCity;
 						operatorRegion = accountDetails.agentInfo.operatorRegion;
+                        
+                        let params = {
+                            ...payload,
+                            channel: "TELLER",
+                            username,
+                            floatAccount,
+                            phoneNumber,
+                            superAgentNumber,
+                            agentNumber,
+                            outletCode,
+                            operatorCode,
+                            businessName,
+                            branchName,
+                            outletName,
+                            operatorCity,
+                            operatorRegion,
+                            agentName
+                        };
+
+                        const response = await this.httpFetch(
+                            "post",
+                            auditTrailUrl,
+                            { payload: params, transactionType, dbName: "teller" }
+                        );
+                        console.log({auditTrailUrl, response});
+
+                        return response; 
 					}
-					let params = {
-						...payload,
-						username,
-						floatAccount,
-						phoneNumber,
-						agentNumber,
-						outletCode,
-						operatorCode,
-						businessName,
-						branchName,
-						outletName,
-						operatorCity,
-						operatorRegion,
-						agentName
-					};
-
-					const response = await this.httpFetch(
-						"post",
-						auditTrailUrl,
-						{ payload: params, transactionType, dbName: "teller" }
-					);
-                    console.log({auditTrailUrl, response});
-
-					return response;     
+                    console.error('<<<<<<<<<<<<COULD NOT LOAD AGENT DETAILS FOR>>>>>>>>>>>>>>',{auditTrailUrl, transactionType});
+                    return {}; 
 				} catch (error) {
 					console.error(error);
 					return {};
