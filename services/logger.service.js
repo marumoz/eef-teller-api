@@ -132,7 +132,7 @@ module.exports = {
 				});
 				try {
 					let floatAccount, agentName, phoneNumber, agentNumber, outletCode, operatorCode, businessName, branchName, outletName, operatorCity, operatorRegion, superAgentNumber;
-					if(isAuthenticated.success && isAuthenticated?.userData?.accountDetails && !["get-occupations", "raise-a-case", "money-gram-report", "txn-report", "fetch-mg-amend", "fetch-mg-reversals", "customer-audit-trail", "password-policy", "download-receipt", "get-id-types", "get-cities", "dashboard-stats", "fetch-id-types"].includes(transactionType)){
+					if(isAuthenticated.success && isAuthenticated?.userData?.accountDetails && !["get-occupations", "raise-a-case", "money-gram-report", "txn-report", "fetch-mg-amend", "fetch-mg-reversals", "customer-audit-trail", "password-policy", "download-receipt", "get-id-types", "get-cities", "dashboard-stats", "fetch-id-types", "reprint-txn-receipt"].includes(transactionType)){
 						const { accountDetails } = isAuthenticated.userData;
 						floatAccount = isAuthenticated.userData.floatAccount?.toString();
 						agentName = accountDetails.personalInfo.agentName;

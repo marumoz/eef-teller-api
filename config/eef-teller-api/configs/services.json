@@ -1,4 +1,15 @@
 {
+    "crowd-funding-deposit": {
+        "phoneNumber": "string",
+        "amount": "string",
+        "tokenNumber": "string"
+    },
+    "crowd-funding-deposit-lookup": {
+        "tokenNumber": "string"
+    },
+    "reprint-txn-receipt": {
+        "operatorCode": "string"
+    },
     "tontine-group-withdrawal": {
         "phoneNumber": "string",
         "amount": "string",
@@ -768,6 +779,11 @@
         "agentCode": "string",
         "outletCode": "string",
         "operatorCode": "string"
+    },
+    "crowd-funding-deposit-charges": {
+        "phoneNumber": "string|length:12",
+        "amount": "string",
+        "floatAccount": "string"
     },
     "tontine-group-withdrawal-charges": {
         "phoneNumber": "string|length:12",

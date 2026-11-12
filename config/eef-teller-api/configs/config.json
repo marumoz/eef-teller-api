@@ -22,6 +22,7 @@
 		"verify-totp"		: "post /EEF_OTPAdaptor/Validate",
 		"raise-a-case"	    : "post /EEF_CRMServices/Main",
 		"registration-uploads": "post /EEF_RegistrationUploadsBackend/Portal",
+		"txn-receipt": "post /EEF_AgentTxnLookup/Main",
 		"get-occupations"	: "get /EEF_GetOccupations/Main"
 	},
     "meta-data": {

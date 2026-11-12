@@ -43,6 +43,79 @@
 					}
 				}
 			},
+			"crowd-funding-deposit": {
+				"request": {
+					"field0": "0200",
+					"field2": "__phoneNumber",
+					"field3": "210000",
+					"field4": "__amount",
+					"field24": "MM",
+					"field65": "__senderPhoneNumber",
+					"field68": "Campaign Token Deposit",
+					"field80": "__tokenNumber",
+					"field100": "CAMPAIGN_TOKEN_DEPOSIT",
+					"field101": "__outletCode",
+					"field102": "__floatAccount",
+					"field103": "__accountNumber",
+					"field104": "__agentCode",
+					"field105": "__operatorCode",
+					"field120": "__senderPhoneNumber",
+					"field125": "__senderName",
+					"field127": "__presentmentData"
+				},
+				"response": {
+					"status": {
+						"field": "field39",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "field48"
+						}
+					}
+				}
+			},
+			"crowd-funding-deposit-lookup": {
+				"override-source": "token-lookup",
+				"remove-template": true,
+				"request": {
+					"requestType": "CAMPAIGN_TOKEN_DEPOSIT",
+                    "Token": "__tokenNumber"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
+			"reprint-txn-receipt": {
+				"override-source": "txn-receipt",
+				"remove-template": true,
+				"request": {
+					"startDate": "__dateFrom",
+                    "endDate": "__dateTo",
+                    "operatorNumber": "__operatorCode",
+                    "txnType": "__txnType",
+                    "channel": "__channel"
+				},
+				"response": {
+					"status": {
+						"field": "responseCode",
+						"matches": [
+							"00"
+						],
+						"error": {
+							"message": "responseMessage"
+						}
+					}
+				}
+			},
 			"tontine-group-withdrawal": {
 				"request": {
 					"field0": "0200",
@@ -319,6 +392,7 @@
                         "Outlet_Code": "__outletCode",
                         "Operator_Code": "__operatorCode",
                         "Transaction_Ref": "__originalTxnRef",
+			            "field37": "create;transactionId",
                         "Account_No": "__customerAccount",
                         "Customer_No": "__customerPhone",
                         "Customer_Name": "__customerName",
@@ -372,6 +446,7 @@
 					"reqType": "STAGE",
                     "data": {
                         "Transaction_Ref": "__referenceNumber",
+			            "field37": "create;transactionId",
                         "Account_No": "__customerAccount",
                         "Customer_No": "__customerPhone",
                         "Customer_Name": "__customerName",
@@ -2834,6 +2909,7 @@
 					"field68": "POS C2C Transfer to account %@field103 - Ref %@field37",
 					"field69": "__city",
 					"field72": "__operatorCity",
+					"field79": "__feeType",
 					"field100": "CASH2CASH_DEPOSIT",
 					"field101": "__outletCode",
 					"field104": "__agentCode",
